@@ -1,5 +1,6 @@
 package Repository;
 
+import Business.TipoUsuario;
 import Business.Usuario;
 
 import java.util.ArrayList;
@@ -34,13 +35,7 @@ public class UsuarioRepository {
         if (id < 0)
             return null;
 
-        Usuario usuario = getById(id);
-
-        if (usuario == null)
-            return null;
-
-        usuarios.remove(usuario);
-        return new Usuario(usuario);
+        return usuarios.remove(id);
     }
 
     public Usuario getById(int id){

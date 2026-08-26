@@ -7,7 +7,7 @@ import java.util.List;
 public class UsuarioController {
     private final UsuarioRepository repoUsuario;
 
-    public UsuarioController(){
+    public UsuarioController() {
         repoUsuario = new UsuarioRepository();
     }
 
@@ -37,6 +37,18 @@ public class UsuarioController {
             return null;
 
         return repoUsuario.getById(id);
+    }
+
+    public Usuario getBySequence(int cod){
+        if (cod < 0)
+            return null;
+
+        List<Usuario> usuarios = getAll();
+
+        if (usuarios.size() <= cod)
+            return null;
+
+        return usuarios.get(cod);
     }
 
     public List<Usuario> getAll(){

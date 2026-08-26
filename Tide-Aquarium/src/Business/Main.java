@@ -9,18 +9,18 @@ public class Main {
     private static Scanner scl = new Scanner(System.in); //Usado para ler Strings
     private static final UIUsuario uiUsuario = new UIUsuario();
 
-    //temporario
     public static void main() {
         int escolha;
 
+        //temporario
         do {
             System.out.println();
             System.out.println("CRUD Usuario");
-            System.out.println("1: Adicionar Usuario");
-            System.out.println("2: Atualizar Usuario");
-            System.out.println("3: Excluir Usuario");
-            System.out.println("4: Buscar Usuario");
-            System.out.println("5: Listar Usuarios");
+            System.out.println("1: Adicionar usuario");
+            System.out.println("2: Atualizar usuario");
+            System.out.println("3: Excluir usuario");
+            System.out.println("4: Buscar usuario pelo ID");
+            System.out.println("5: Listar usuarios");
             System.out.println("0: Sair");
             System.out.print("Sua escolha: ");
             escolha = scn.nextInt();
@@ -33,13 +33,13 @@ public class Main {
                     uiUsuario.update();
                     break;
                 case 3:
-                    uiUsuario.deleteById();
+                    uiUsuario.delete();
                     break;
                 case 4:
                     uiUsuario.getById();
                     break;
                 case 5:
-                    uiUsuario.listar();
+                    uiUsuario.showAll();
                     break;
                 case 0:
                     System.out.println("Finalizando...");

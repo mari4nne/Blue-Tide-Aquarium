@@ -44,13 +44,13 @@ public class Usuario {
         return fone;
     }
 
+    public TipoUsuario getTipo() {
+        return tipo;
+    }
+
     public void setNome(String nome) {
         if (!nome.isBlank())
             this.nome = nome;
-    }
-
-    public TipoUsuario getTipo() {
-        return tipo;
     }
 
     public void setTipo(TipoUsuario tipo) {
