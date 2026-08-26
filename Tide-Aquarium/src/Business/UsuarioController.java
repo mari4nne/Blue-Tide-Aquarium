@@ -2,27 +2,27 @@ package Business;
 
 import Repository.UsuarioRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioController {
-    private UsuarioRepository repoUsuario;
+    private final UsuarioRepository repoUsuario;
 
     public UsuarioController(){
         repoUsuario = new UsuarioRepository();
     }
 
-    public boolean add(Usuario u){
-        if (u == null)
+    public boolean add(Usuario usuario){
+        if (usuario == null)
             return false;
 
-        return repoUsuario.add(u);
+        return repoUsuario.add(usuario);
     }
 
-    public boolean update(Usuario uAlterado){
-        if (uAlterado == null)
+    public boolean update(Usuario usuarioAlterado){
+        if (usuarioAlterado == null)
             return false;
 
-        return repoUsuario.update(uAlterado);
+        return repoUsuario.update(usuarioAlterado);
     }
 
     public Usuario deleteById(int id){
@@ -39,7 +39,7 @@ public class UsuarioController {
         return repoUsuario.getById(id);
     }
 
-    public ArrayList<Usuario> getAll(){
+    public List<Usuario> getAll(){
     return repoUsuario.getAll();
     }
 }

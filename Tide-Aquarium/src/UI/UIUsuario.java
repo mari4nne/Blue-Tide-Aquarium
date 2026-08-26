@@ -4,13 +4,14 @@ import Business.TipoUsuario;
 import Business.Usuario;
 import Business.UsuarioController;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class UIUsuario {
-    UsuarioController controlador;
+    private final UsuarioController controlador;
+
     private Scanner scn;
-    private Scanner scl;
+    private Scanner scl; //Usado para ler Strings
 
     public UIUsuario(){
         controlador = new UsuarioController();
@@ -130,7 +131,7 @@ public class UIUsuario {
     public void listar(){
         System.out.println();
         System.out.println("Usuarios:");
-        ArrayList<Usuario> usuarios = controlador.getAll();
+        List<Usuario> usuarios = controlador.getAll();
         for (Usuario u : usuarios) {
             System.out.println(u.getId() + "  " + u.getNome() + "  " + u.getFone());
         }

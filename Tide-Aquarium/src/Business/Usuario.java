@@ -3,7 +3,7 @@ package Business;
 public class Usuario {
     private static int novoId = 0;
 
-    private int id;
+    private final int id;
     private String nome;
     private TipoUsuario tipo;
     private String fone;
@@ -19,18 +19,17 @@ public class Usuario {
         this.fone = fone;
     }
 
-    public static Usuario getInstance(String nome, TipoUsuario tipo, String fone){
-        if (!nome.isBlank() && !fone.isBlank() && tipo != null){
-            return new Usuario(nome, tipo, fone);
-        }
-        return null;
-    }
-
     public Usuario(Usuario outro) {
         this.id = outro.id;
         this.nome = outro.nome;
         this.tipo = outro.tipo;
         this.fone = outro.fone;
+    }
+
+    public static Usuario getInstance(String nome, TipoUsuario tipo, String fone){
+        if (!nome.isBlank() && !fone.isBlank() && tipo != null)
+            return new Usuario(nome, tipo, fone);
+        return null;
     }
 
     public int getId() {

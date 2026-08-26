@@ -12,18 +12,18 @@ public class UsuarioRepository {
         usuarios = new ArrayList<>();
     }
 
-    public boolean add(Usuario u){
-        if (u == null)
+    public boolean add(Usuario usuario){
+        if (usuario == null)
             return false;
-        return usuarios.add(u);
+        return usuarios.add(usuario);
     }
 
-    public boolean update(Usuario uAlterado){
-        if (uAlterado == null)
+    public boolean update(Usuario usuarioAlterado){
+        if (usuarioAlterado == null)
             return false;
         for (int i = 0; i < usuarios.size(); i++) {
-            if (usuarios.get(i).getId() == uAlterado.getId()){
-                usuarios.set(i, uAlterado);
+            if (usuarios.get(i).getId() == usuarioAlterado.getId()){
+                usuarios.set(i, usuarioAlterado);
                 return true;
             }
         }
@@ -34,7 +34,7 @@ public class UsuarioRepository {
         if (id < 0)
             return null;
 
-        Usuario u = buscarPorId(id);
+        Usuario u = getById(id);
 
         if (u == null)
             return null;
@@ -46,28 +46,20 @@ public class UsuarioRepository {
     public Usuario getById(int id){
         if (id < 0)
             return null;
-
-        return buscarPorId(id);
+        for (Usuario usuario : usuarios) {
+            if (usuario.getId() == id)
+                return usuario;
+        }
+        return null;
     }
 
-    public ArrayList<Usuario> getAll(){
-        ArrayList<Usuario> aux = new ArrayList<>();
+    public List<Usuario> getAll(){
+        List<Usuario> aux = new ArrayList<>();
 
         for (Usuario u : usuarios) {
             aux.add(new Usuario(u));
         }
 
         return aux;
-    }
-
-    private Usuario buscarPorId(int id) {
-        if (id < 0)
-            return null;
-
-        for (int i = 0; i < usuarios.size(); i++) {
-            if (usuarios.get(i).getId() == id)
-                return usuarios.get(i);
-        }
-        return null;
     }
 }
