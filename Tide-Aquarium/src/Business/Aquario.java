@@ -34,4 +34,28 @@ public class Aquario {
             return new Aquario(usuarioId, cod, volume, tipo);
         return null;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setUsuarioId(int usuarioId) {
+        if (usuarioId > 0)
+            this.usuarioId = usuarioId;
+    }
+
+    public void setCod(String cod) {
+        if (!cod.isBlank())
+            this.cod = cod;
+    }
+
+    public void setVolume(double volume) {
+        if (volume >= 0)
+           this.volume = volume;
+    }
+
+    public void setTipo(TipoAgua tipo) {
+        if (tipo != null)
+          this.tipo = tipo;
+    }
 }

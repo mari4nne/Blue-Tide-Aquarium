@@ -61,8 +61,8 @@ public class UIUsuario {
         System.out.print("Id do usuario: ");
         int id = scn.nextInt();
 
-        Usuario uAlterado = controlador.getById(id);
-        if (uAlterado == null) {
+        Usuario usuarioAlterado = controlador.getById(id);
+        if (usuarioAlterado == null) {
             System.out.println("Usuario nao encontrado.");
             return;
         }
@@ -91,11 +91,11 @@ public class UIUsuario {
         System.out.print("Novo telefone: ");
         String fone = scl.nextLine();
 
-        uAlterado.setNome(nome);
-        uAlterado.setTipo(tipo);
-        uAlterado.setFone(fone);
+        usuarioAlterado.setNome(nome);
+        usuarioAlterado.setTipo(tipo);
+        usuarioAlterado.setFone(fone);
 
-        if (controlador.update(uAlterado))
+        if (controlador.update(usuarioAlterado))
             System.out.println("Usuario alterado!");
         else
             System.out.println("Falha em alterar o usuario.");
@@ -104,7 +104,11 @@ public class UIUsuario {
     public void deleteById(){
         listar();
         System.out.print("Id do usuario: ");
-        int id = scn.nextInt();
+
+        int id;
+        do {
+            id = scn.nextInt();
+        } while (id < 0);
 
         Usuario usuarioExcluido = controlador.deleteById(id);
         if (usuarioExcluido != null)
@@ -132,8 +136,8 @@ public class UIUsuario {
         System.out.println();
         System.out.println("Usuarios:");
         List<Usuario> usuarios = controlador.getAll();
-        for (Usuario u : usuarios) {
-            System.out.println(u.getId() + "  " + u.getNome() + "  " + u.getFone());
+        for (Usuario usuario : usuarios) {
+            System.out.println(usuario.getId() + "  " + usuario.getNome() + "  " + usuario.getFone());
         }
     }
 }

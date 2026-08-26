@@ -34,13 +34,13 @@ public class UsuarioRepository {
         if (id < 0)
             return null;
 
-        Usuario u = getById(id);
+        Usuario usuario = getById(id);
 
-        if (u == null)
+        if (usuario == null)
             return null;
 
-        usuarios.remove(u);
-        return new Usuario(u);
+        usuarios.remove(usuario);
+        return new Usuario(usuario);
     }
 
     public Usuario getById(int id){
@@ -56,8 +56,8 @@ public class UsuarioRepository {
     public List<Usuario> getAll(){
         List<Usuario> aux = new ArrayList<>();
 
-        for (Usuario u : usuarios) {
-            aux.add(new Usuario(u));
+        for (Usuario usuario : usuarios) {
+            aux.add(new Usuario(usuario));
         }
 
         return aux;
