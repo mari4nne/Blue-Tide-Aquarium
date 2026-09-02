@@ -1,32 +1,36 @@
-package UI;
+package ui;
 
-import Business.AquarioController;
-import Business.TipoAgua;
+import business.PeixeController;
 
 import java.util.Scanner;
 
-public class UIAquario {
-    private final AquarioController controlador;
+public class UIPeixe {
+    private final PeixeController controlador;
 
     private Scanner scn;
 
-    public UIAquario(){
-        controlador = new AquarioController();
+    public UIPeixe(){
+        controlador = new PeixeController();
         scn = new Scanner(System.in);
     }
 
     public void add(){
+
     }
 
     public void update(){
+
     }
 
     public void deleteById(){
+
     }
 
     public void getById(){
+
     }
 
     public void listar(){
+
     }
 }

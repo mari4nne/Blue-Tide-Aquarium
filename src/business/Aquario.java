@@ -1,4 +1,4 @@
-package Business;
+package business;
 public class Aquario {
 
 	private static int geraId = 1;

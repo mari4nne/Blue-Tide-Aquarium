@@ -1,6 +1,6 @@
-package Repository;
+package repository;
 
-import Business.Aquario;
+import business.Aquario;
 
 import java.util.ArrayList;
 import java.util.List;

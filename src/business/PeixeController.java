@@ -1,15 +1,14 @@
-package Repository;
+package business;
 
-import Business.Peixe;
+import repository.PeixeRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class PeixeRepository {
-    private List<Peixe> peixes;
+public class PeixeController {
+    private final PeixeRepository repoPeixe;
 
-    public PeixeRepository(){
-        peixes = new ArrayList<>();
+    public PeixeController(){
+        repoPeixe = new PeixeRepository();
     }
 
     public boolean add(Peixe peixe){

@@ -1,6 +1,6 @@
-package Business;
+package business;
 
-import Repository.AquarioRepository;
+import repository.AquarioRepository;
 
 import java.util.List;
 

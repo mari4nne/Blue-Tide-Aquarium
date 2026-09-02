@@ -1,6 +1,6 @@
-package Business;
+package business;
 
-import UI.UIUsuario;
+import ui.UIUsuario;
 
 import java.util.Scanner;
 
