@@ -1,8 +1,8 @@
-package UI;
+package ui;
 
-import Business.TipoUsuario;
-import Business.Usuario;
-import Business.UsuarioController;
+import business.TipoUsuario;
+import business.Usuario;
+import business.UsuarioController;
 
 import java.util.List;
 import java.util.Scanner;

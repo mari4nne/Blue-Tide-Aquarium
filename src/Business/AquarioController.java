@@ -1,6 +1,6 @@
-package Business;
+package business;
 
-import Repository.AquarioRepository;
+import repository.AquarioRepository;
 
 import java.util.List;
 
@@ -12,19 +12,19 @@ public class AquarioController {
     }
 
     public boolean add(Aquario aquario){
-            return false;
+        return false;
     }
 
     public boolean update(Aquario aquarioAlterado){
-            return false;
+        return false;
     }
 
     public Aquario deleteById(int id){
-            return null;
+        return null;
     }
 
     public Aquario getById(int id){
-            return null;
+        return null;
     }
 
     public List<Aquario> getAll(){

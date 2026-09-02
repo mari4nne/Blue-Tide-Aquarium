@@ -1,6 +1,6 @@
-package Business;
+package business;
 
-import Repository.UsuarioRepository;
+import repository.UsuarioRepository;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
-package Repository;
+package repository;
 
-import Business.TipoUsuario;
-import Business.Usuario;
+import business.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
