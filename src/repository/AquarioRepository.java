@@ -44,7 +44,7 @@ public class AquarioRepository {
     public Aquario getById(int id){
         for(Aquario aquario : aquarios){
             if(aquario.getId() == id){
-                return aquario;
+                return new Aquario(aquario);
             }
         }
         return null;

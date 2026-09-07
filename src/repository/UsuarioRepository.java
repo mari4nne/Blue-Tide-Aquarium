@@ -42,7 +42,7 @@ public class UsuarioRepository {
             return null;
         for (Usuario usuario : usuarios) {
             if (usuario.getId() == id)
-                return usuario;
+                return new Usuario(usuario);
         }
         return null;
     }

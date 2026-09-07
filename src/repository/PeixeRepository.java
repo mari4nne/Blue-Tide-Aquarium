@@ -44,7 +44,7 @@ public class PeixeRepository {
             return null;
         for (Peixe peixe : peixes) {
             if (peixe.getIdPeixe() == id) {
-                return peixe;
+                return new Peixe(peixe);
             }
         }
         return null;
