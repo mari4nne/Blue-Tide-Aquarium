@@ -4,7 +4,7 @@ public class Peixe {
     private static int geraId = 0;
     private final int idPeixe;
     private String nomePeixe;
-    private TipoAgua tipoAgua;
+    private final TipoAgua tipoAgua;
     private int idAquario;
     private int idUsuario;
 
@@ -35,10 +35,6 @@ public class Peixe {
         return tipoAgua;
     }
 
-    public void setTipoAgua(TipoAgua tipoAgua) {
-        this.tipoAgua = tipoAgua;
-    }
-
     public String getNomePeixe() {
         return nomePeixe;
     }
@@ -50,7 +46,6 @@ public class Peixe {
     public int getIdPeixe() {
         return this.idPeixe;
     }
-
 
     public int getIdAquario() {
         return idAquario;

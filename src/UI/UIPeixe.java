@@ -69,7 +69,42 @@ public class UIPeixe {
     }
 
     public void update(){
+        showAll();
 
+        int codigo;
+        do {
+            System.out.println("Código do peixe:");
+            codigo = scn.nextInt();
+        } while (codigo < 0);
+
+        Peixe peixeAlterado = controlador.getById(codigo);
+        if (peixeAlterado == null) {
+            System.out.println("Peixe não encontrado.");
+            return;
+        }
+
+        String nome = null;
+        int escolha;
+        do {
+            System.out.println("Alterar nome:");
+            System.out.println("1) - Sim");
+            System.out.println("2) - Não");
+            escolha = scn.nextInt();
+            if (escolha == 1) {
+                System.out.println("Novo nome do peixe:");
+                nome = scl.nextLine();
+            }
+        } while (escolha != 1 && escolha != 2);
+
+        if (nome != null) {
+            peixeAlterado.setNomePeixe(nome);
+        }
+
+        if (controlador.update(peixeAlterado)) {
+            System.out.println("Peixe alterado!");
+        } else {
+            System.out.println("Falha ao tentar alterar peixe!");
+        }
     }
 
     public void deleteById(){

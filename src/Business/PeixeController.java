@@ -43,5 +43,15 @@ public class PeixeController {
         return repoPeixe.getAll();
     }
 
+    public boolean verifyTipoAgua (Peixe p, Aquario a) {
+        if (p == null || a == null) return false;
 
+        return a.getTipo() == p.getTipoAgua();
+    }
+
+    public boolean verifyIdUser (Usuario u, Peixe p) {
+        if (u == null || p == null) return false;
+
+        return p.getIdUsuario() == u.getId();
+    }
 }
