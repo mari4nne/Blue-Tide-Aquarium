@@ -1,6 +1,8 @@
 package ui;
+
 import java.util.List;
 import java.util.Scanner;
+
 import business.Aquario;
 import business.AquarioController;
 import business.TipoAgua;
@@ -13,6 +15,7 @@ public class UIAquario {
     private final UsuarioController controladorUsuario;
 
     private Scanner scn;
+
     public UIAquario(UsuarioController controladorUsuario){
 
         controlador = new AquarioController();
@@ -22,10 +25,14 @@ public class UIAquario {
     }
 
     public void add(){
+
         System.out.println("Digite o código do aquário:");
-        int codigo = scn.nextInt();
+        scn.nextLine();
+        String codigo = scn.nextLine();
+
         System.out.println("Digite o volume do aquário:");
         float volume = scn.nextFloat();
+
         System.out.println("Digite o tipo de água:");
         System.out.println("1 - DOCE");
         System.out.println("2 - SALGADA");
@@ -73,14 +80,9 @@ public class UIAquario {
 
         Usuario usuario = usuarios.get(escolhaUsuario - 1);
 
-        Aquario aquario = new Aquario();
+        Aquario aquario = Aquario.getInstance(codigo, volume, tipo, usuario);
 
-        aquario.setCodigo(codigo);
-        aquario.setVolume(volume);
-        aquario.setTipo(tipo);
-        aquario.setUsuario(usuario);
-
-        if(controlador.add(aquario)){
+        if(aquario != null && controlador.add(aquario)){
 
             System.out.println("Aquário adicionado com sucesso!");
 
@@ -107,7 +109,8 @@ public class UIAquario {
         }
 
         System.out.println("Digite o novo código:");
-        int codigo = scn.nextInt();
+        scn.nextLine();
+        String codigo = scn.nextLine();
 
         System.out.println("Digite o novo volume:");
         float volume = scn.nextFloat();
@@ -207,9 +210,13 @@ public class UIAquario {
             System.out.println("Tipo de água: " + aquario.getTipo());
 
             if(aquario.getUsuario() != null)
+
                 System.out.println("Usuario: " + aquario.getUsuario().getNome());
+
             else
+
                 System.out.println("Usuario: Nenhum");
+
             System.out.println("Ultima alimentação: " + aquario.getUltimaAlimentacao());
             System.out.println("Proxima alimentação: " + aquario.getProximaAlimentacao());
 
@@ -220,14 +227,18 @@ public class UIAquario {
     public void listar(){
 
         for(Aquario aquario : controlador.getAll()){
+
             System.out.println("Id: " + aquario.getId());
             System.out.println("Código: " + aquario.getCodigo());
             System.out.println("Volume: " + aquario.getVolume());
             System.out.println("Tipo de água: " + aquario.getTipo());
 
             if(aquario.getUsuario() != null)
+
                 System.out.println("Usuario: " + aquario.getUsuario().getNome());
+
             else
+
                 System.out.println("Usuario: Nenhum");
 
             System.out.println("Ultima alimentação: " + aquario.getUltimaAlimentacao());
@@ -243,7 +254,9 @@ public class UIAquario {
 
         System.out.println("Digite o id do aquário:");
         int id = scn.nextInt();
+
         Aquario aquario = controlador.getById(id);
+
         if(aquario == null){
 
             System.out.println("Aquário não encontrado.");
@@ -253,19 +266,26 @@ public class UIAquario {
 
         System.out.println("Digite a hora da alimentação:");
         int hora = scn.nextInt();
+
         System.out.println("Digite os minutos:");
         int minuto = scn.nextInt();
 
         if(hora < 0 || hora > 23 || minuto < 0 || minuto > 59){
+
             System.out.println("Horário inválido.");
             return;
 
         }
 
         aquario.setUltimaAlimentacao(
-            java.time.LocalTime.of(hora, minuto));
-        System.out.println("Alimentação registrada às " + aquario.getUltimaAlimentacao());
-        System.out.println("Próxima alimentação: " + aquario.getProximaAlimentacao());
+            java.time.LocalTime.of(hora, minuto)
+        );
+
+        System.out.println("Alimentação registrada às "
+                + aquario.getUltimaAlimentacao());
+
+        System.out.println("Próxima alimentação: "
+                + aquario.getProximaAlimentacao());
 
     }
 
