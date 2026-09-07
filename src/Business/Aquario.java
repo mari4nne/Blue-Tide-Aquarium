@@ -3,6 +3,7 @@ import java.time.LocalTime;
 public class Aquario {
 
     private static int geraId = 0;
+
     private String codigo;
     private int id;
     private float volume;
@@ -34,17 +35,10 @@ public class Aquario {
     }
 
     public static Aquario getInstance(String codigo, float volume, TipoAgua tipo, Usuario usuario){
+
         if(!codigo.isBlank() && volume > 0 && tipo != null && usuario != null)
             return new Aquario(codigo, volume, tipo, usuario);
         return null;
-    }
-
-    public static int getGeraId(){
-        return geraId;
-    }
-
-    public static void setGeraId(int geraId){
-        Aquario.geraId = geraId;
     }
 
     public String getCodigo(){
@@ -90,7 +84,7 @@ public class Aquario {
     public LocalTime getUltimaAlimentacao(){
         return ultimaAlimentacao;
     }
-
+    
     public void setUltimaAlimentacao(LocalTime ultimaAlimentacao){
         this.ultimaAlimentacao = ultimaAlimentacao;
     }
@@ -100,5 +94,4 @@ public class Aquario {
             return null;
         return ultimaAlimentacao.plusHours(10);
     }
-
 }
