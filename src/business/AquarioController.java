@@ -1,47 +1,50 @@
 package business;
 import java.util.List;
-
 import repository.AquarioRepository;
 
 public class AquarioController {
 
-	private final AquarioRepository repoAquario;
+    private final AquarioRepository repoAquario;
 
-	public AquarioController() {
+    public AquarioController() {
+        repoAquario = new AquarioRepository();
+    }
 
-		repoAquario = new AquarioRepository();
-	}
+    public boolean add(Aquario aquario) {
 
-	public boolean add(Aquario aquario) {
+        if (aquario == null)
+            return false;
+        return repoAquario.add(aquario);
+    }
 
-		if (aquario == null)
-			return false;
-		return repoAquario.add(aquario);
+    public boolean update(Aquario aquarioAlterado) {
 
-	}
+        if (aquarioAlterado == null)
+            return false;
+        return repoAquario.update(aquarioAlterado);
+    }
 
-	public boolean update(Aquario aquarioAlterado) {
+    public Aquario deleteById(int id) {
 
-		if (aquarioAlterado == null)
-			return false;
-		return repoAquario.update(aquarioAlterado);
+        if (id < 0)
+            return null;
+        return repoAquario.deleteById(id);
+    }
 
-	}
+    public Aquario getById(int id) {
 
-	public Aquario deleteById(int id) {
-		if (id < 0)
-			return null;
-		return repoAquario.deleteById(id);
-	}
+        if (id < 0)
+            return null;
+        return repoAquario.getById(id);
+    }
 
-	public Aquario getById(int id) {
-		if (id < 0)
-			return null;
-		return repoAquario.getById(id);
+    public List<Aquario> getAll() {
+        return repoAquario.getAll();
+    }
 
-	}
-
-	public List<Aquario> getAll() {
-		return repoAquario.getAll();
-	}
+    public boolean pertenceAoUsuario(Aquario aquario, int idUsuario){
+        if(aquario == null || aquario.getUsuario() == null)
+            return false;
+        return aquario.getUsuario().getId() == idUsuario;
+    }
 }
