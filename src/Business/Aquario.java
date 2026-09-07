@@ -1,9 +1,9 @@
 package business;
 import java.time.LocalTime;
+
 public class Aquario {
 
     private static int geraId = 0;
-
     private String codigo;
     private int id;
     private float volume;
@@ -16,26 +16,25 @@ public class Aquario {
     }
 
     private Aquario(String codigo, float volume, TipoAgua tipo, Usuario usuario){
-
         this();
         this.codigo = codigo;
         this.volume = volume;
         this.tipo = tipo;
         this.usuario = usuario;
+
     }
 
     public Aquario(Aquario a){
-
         this.id = a.id;
         this.codigo = a.codigo;
         this.volume = a.volume;
         this.tipo = a.tipo;
         this.usuario = a.usuario;
         this.ultimaAlimentacao = a.ultimaAlimentacao;
+
     }
 
     public static Aquario getInstance(String codigo, float volume, TipoAgua tipo, Usuario usuario){
-
         if(!codigo.isBlank() && volume > 0 && tipo != null && usuario != null)
             return new Aquario(codigo, volume, tipo, usuario);
         return null;
@@ -51,10 +50,6 @@ public class Aquario {
 
     public int getId(){
         return id;
-    }
-
-    public void setId(int id){
-        this.id = id;
     }
 
     public float getVolume(){
@@ -84,7 +79,7 @@ public class Aquario {
     public LocalTime getUltimaAlimentacao(){
         return ultimaAlimentacao;
     }
-    
+
     public void setUltimaAlimentacao(LocalTime ultimaAlimentacao){
         this.ultimaAlimentacao = ultimaAlimentacao;
     }
@@ -93,5 +88,7 @@ public class Aquario {
         if(ultimaAlimentacao == null)
             return null;
         return ultimaAlimentacao.plusHours(10);
+
     }
+
 }
