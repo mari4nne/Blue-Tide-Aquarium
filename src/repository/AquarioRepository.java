@@ -2,6 +2,8 @@ package repository;
 import java.util.ArrayList;
 import java.util.List;
 import business.Aquario;
+import business.Usuario;
+
 public class AquarioRepository {
 
     private final List<Aquario> aquarios;
@@ -51,7 +53,13 @@ public class AquarioRepository {
     }
 
     public List<Aquario> getAll(){
-        return aquarios;
+        List<Aquario> aux = new ArrayList<>();
+
+        for (Aquario aquario : aquarios) {
+            aux.add(new Aquario(aquario));
+        }
+
+        return aux;
     }
 }
 
