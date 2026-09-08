@@ -8,7 +8,7 @@ public class UsuarioController {
     private final UsuarioRepository repoUsuario;
 
     public UsuarioController() {
-        repoUsuario = new UsuarioRepository();
+        repoUsuario = UsuarioRepository.getInstance();
     }
 
     public boolean add(Usuario usuario){
@@ -52,6 +52,6 @@ public class UsuarioController {
     }
 
     public List<Usuario> getAll(){
-    return repoUsuario.getAll();
+        return repoUsuario.getAll();
     }
 }

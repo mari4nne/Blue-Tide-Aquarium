@@ -9,8 +9,8 @@ public class AquarioController {
     private final UsuarioRepository repoUsuario;
 
     public AquarioController() {
-        repoAquario = new AquarioRepository();
-        repoUsuario = new UsuarioRepository();
+        repoAquario = AquarioRepository.getInstance();
+        repoUsuario = UsuarioRepository.getInstance();
     }
 
     public boolean add(Aquario aquario) {
