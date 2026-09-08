@@ -1,13 +1,16 @@
 package business;
 import java.util.List;
 import repository.AquarioRepository;
+import repository.UsuarioRepository;
 
 public class AquarioController {
 
     private final AquarioRepository repoAquario;
+    private final UsuarioRepository repoUsuario;
 
     public AquarioController() {
         repoAquario = new AquarioRepository();
+        repoUsuario = new UsuarioRepository();
     }
 
     public boolean add(Aquario aquario) {
@@ -39,8 +42,16 @@ public class AquarioController {
     }
 
     public boolean pertenceAoUsuario(Aquario aquario, int idUsuario){
-        if(aquario == null || aquario.getUsuario() == null)
+        if(aquario == null || idUsuario < 0)
             return false;
-        return aquario.getUsuario().getId() == idUsuario;
+        return aquario.getIdUsuario() == idUsuario;
+    }
+
+    public String buscarNomeUsuarioPorId(int idUsuario){
+        Usuario usuario = repoUsuario.getById(idUsuario);
+
+        if (usuario != null)
+            return usuario.getNome();
+        return "Nenhum";
     }
 }

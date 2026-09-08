@@ -8,19 +8,19 @@ public class Aquario {
     private int id;
     private float volume;
     private TipoAgua tipo;
-    private Usuario usuario;
+    private int idUsuario;
     private LocalTime ultimaAlimentacao;
 
     private Aquario(){
         this.id = geraId++;
     }
 
-    private Aquario(String codigo, float volume, TipoAgua tipo, Usuario usuario){
+    private Aquario(String codigo, float volume, TipoAgua tipo, int idUsuario){
         this();
         this.codigo = codigo;
         this.volume = volume;
         this.tipo = tipo;
-        this.usuario = usuario;
+        this.idUsuario = idUsuario;
 
     }
 
@@ -29,14 +29,14 @@ public class Aquario {
         this.codigo = a.codigo;
         this.volume = a.volume;
         this.tipo = a.tipo;
-        this.usuario = a.usuario;
+        this.idUsuario = a.idUsuario;
         this.ultimaAlimentacao = a.ultimaAlimentacao;
 
     }
 
-    public static Aquario getInstance(String codigo, float volume, TipoAgua tipo, Usuario usuario){
-        if(!codigo.isBlank() && volume > 0 && tipo != null && usuario != null)
-            return new Aquario(codigo, volume, tipo, usuario);
+    public static Aquario getInstance(String codigo, float volume, TipoAgua tipo, int idUsuario){
+        if(!codigo.isBlank() && volume > 0 && tipo != null && idUsuario > 0)
+            return new Aquario(codigo, volume, tipo, idUsuario);
         return null;
     }
 
@@ -57,7 +57,8 @@ public class Aquario {
     }
 
     public void setVolume(float volume){
-        this.volume = volume;
+        if (volume > 0)
+            this.volume = volume;
     }
 
     public TipoAgua getTipo(){
@@ -65,15 +66,17 @@ public class Aquario {
     }
 
     public void setTipo(TipoAgua tipo){
-        this.tipo = tipo;
+        if (tipo != null)
+            this.tipo = tipo;
     }
 
-    public Usuario getUsuario(){
-        return usuario;
+    public int getIdUsuario(){
+        return idUsuario;
     }
 
-    public void setUsuario(Usuario usuario){
-        this.usuario = usuario;
+    public void setIdUsuario(int idUsuario){
+        if (idUsuario > 0)
+            this.idUsuario = idUsuario;
     }
 
     public LocalTime getUltimaAlimentacao(){
@@ -81,7 +84,8 @@ public class Aquario {
     }
 
     public void setUltimaAlimentacao(LocalTime ultimaAlimentacao){
-        this.ultimaAlimentacao = ultimaAlimentacao;
+        if (ultimaAlimentacao != null)
+            this.ultimaAlimentacao = ultimaAlimentacao;
     }
 
     public LocalTime getProximaAlimentacao(){

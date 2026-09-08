@@ -1,5 +1,6 @@
 package ui;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Scanner;
 
@@ -78,9 +79,8 @@ public class UIAquario {
 
         }
 
-        Usuario usuario = usuarios.get(escolhaUsuario - 1);
-
-        Aquario aquario = Aquario.getInstance(codigo, volume, tipo, usuario);
+        int idUsuario = escolhaUsuario - 1;
+        Aquario aquario = Aquario.getInstance(codigo, volume, tipo, idUsuario);
 
         if(aquario != null && controlador.add(aquario)){
 
@@ -149,15 +149,12 @@ public class UIAquario {
 
             }
 
-            System.out.print("Escolha o novo usuario: ");
+            System.out.print("Escolha o id do novo usuario: ");
             int escolhaUsuario = scn.nextInt();
 
             if(escolhaUsuario >= 1 && escolhaUsuario <= usuarios.size()){
-
-                aquario.setUsuario(usuarios.get(escolhaUsuario - 1));
-
+                aquario.setIdUsuario(escolhaUsuario - 1);
             }
-
         }
 
         if(controlador.update(aquario)){
@@ -209,13 +206,7 @@ public class UIAquario {
             System.out.println("Volume: " + aquario.getVolume());
             System.out.println("Tipo de água: " + aquario.getTipo());
 
-            if(aquario.getUsuario() != null)
-
-                System.out.println("Usuario: " + aquario.getUsuario().getNome());
-
-            else
-
-                System.out.println("Usuario: Nenhum");
+            System.out.println("Usuario: " + controlador.buscarNomeUsuarioPorId(aquario.getIdUsuario()));
 
             System.out.println("Ultima alimentação: " + aquario.getUltimaAlimentacao());
             System.out.println("Proxima alimentação: " + aquario.getProximaAlimentacao());
@@ -233,13 +224,7 @@ public class UIAquario {
             System.out.println("Volume: " + aquario.getVolume());
             System.out.println("Tipo de água: " + aquario.getTipo());
 
-            if(aquario.getUsuario() != null)
-
-                System.out.println("Usuario: " + aquario.getUsuario().getNome());
-
-            else
-
-                System.out.println("Usuario: Nenhum");
+            System.out.println("Usuario: " + controlador.buscarNomeUsuarioPorId(aquario.getIdUsuario()));
 
             System.out.println("Ultima alimentação: " + aquario.getUltimaAlimentacao());
             System.out.println("Proxima alimentação: " + aquario.getProximaAlimentacao());
@@ -263,23 +248,9 @@ public class UIAquario {
             return;
 
         }
+        LocalTime horarioAtual = LocalTime.now();
 
-        System.out.println("Digite a hora da alimentação:");
-        int hora = scn.nextInt();
-
-        System.out.println("Digite os minutos:");
-        int minuto = scn.nextInt();
-
-        if(hora < 0 || hora > 23 || minuto < 0 || minuto > 59){
-
-            System.out.println("Horário inválido.");
-            return;
-
-        }
-
-        aquario.setUltimaAlimentacao(
-            java.time.LocalTime.of(hora, minuto)
-        );
+        aquario.setUltimaAlimentacao(horarioAtual);
 
         System.out.println("Alimentação registrada às "
                 + aquario.getUltimaAlimentacao());
