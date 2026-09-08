@@ -4,6 +4,7 @@ import business.Peixe;
 import business.PeixeController;
 import business.TipoAgua;
 import business.Usuario;
+import business.Aquario;
 
 import java.util.List;
 import java.util.Scanner;
@@ -59,12 +60,58 @@ public class UIPeixe {
         System.out.println("Digite o id do usuário ao qual o peixe pertence:");
         int idUsuario = scn.nextInt();
 
-        Peixe novoPeixe = Peixe.getInstance(nome, tipo, idAquario, idUsuario);
+        if (controlador.verifyUsuarioExistence(idUsuario) && controlador.verifyAquarioExistence(idAquario)) {
+            Peixe novoPeixe = Peixe.getInstance(nome, tipo, idAquario, idUsuario);
 
-        if (novoPeixe != null && controlador.add(novoPeixe)){
-            System.out.println("Peixe criado!");
+            if (novoPeixe != null && controlador.add(novoPeixe)){
+                System.out.println("Peixe cadastrado!");
+            } else {
+                System.out.println("Falha ao cadastrar peixe!");
+            }
         } else {
-            System.out.println("Falha ao criar peixe!");
+            System.out.println("Não foi possível cadastrar peixe!");
+        }
+    }
+
+    public void switchAquario() {
+        System.out.println("Verifique qual peixe deseja mudar de aquário:");
+        showAll();
+
+        System.out.println();
+        System.out.println("Insira abaixo o id do peixe:");
+        int codPeixe = scn.nextInt();
+
+        do {
+            System.out.println("Insira um valor válido");
+            codPeixe = scn.nextInt();
+        } while (codPeixe < 0);
+
+        Peixe verificando = controlador.getById(codPeixe);
+
+        System.out.println();
+        System.out.println("Insira abaixo o id do aquário pra onde deseja transferir:");
+        int codAquario = scn.nextInt();
+
+        do {
+            System.out.println("Insira um valor válido");
+            codAquario = scn.nextInt();
+        } while (codAquario < 0);
+
+        System.out.println();
+        System.out.println("Verificando tipo do aquário...");
+
+        if (controlador.verifyTipoAgua(verificando, codAquario)
+                && controlador.verifyDonoAquario(verificando, codAquario)
+                && controlador.verifyUsuarioExistence(verificando.getIdUsuario())) {
+            verificando.setIdAquario(codAquario);
+
+            if (controlador.update(verificando)) {
+                System.out.println("Peixe transferido com sucesso!");
+            } else {
+                System.out.println("Falha ao transferir peixe!");
+            }
+        } else {
+            System.out.println("Não foi possível transferir: tipo de água incompatível, aquário não pertence ao usuário do peixe, ou usuário inexistente.");
         }
     }
 
@@ -107,7 +154,7 @@ public class UIPeixe {
         }
     }
 
-    public void deleteById(){
+    public void delete(){
         showAll();
         int codigo;
         do {
@@ -163,10 +210,10 @@ public class UIPeixe {
         List<Peixe> peixes = controlador.getAll();
         for (Peixe peixe : peixes) {
             if (peixe.getTipoAgua() == TipoAgua.DOCE) {
-                System.out.println(peixe.getIdPeixe() + " " + peixe.getNomePeixe() + " " + peixe.getIdAquario() + " " + peixe.getIdAquario() + "AGUA DOCE");
+                System.out.println(peixe.getIdPeixe() + " " + peixe.getNomePeixe() + " " + peixe.getIdAquario() + " " + peixe.getIdAquario() + " AGUA DOCE");
             }
             if (peixe.getTipoAgua() == TipoAgua.SALGADA) {
-                System.out.println(peixe.getIdPeixe() + " " + peixe.getNomePeixe() + " " + peixe.getIdAquario() + " " + peixe.getIdAquario() + "AGUA SALGADA");
+                System.out.println(peixe.getIdPeixe() + " " + peixe.getNomePeixe() + " " + peixe.getIdAquario() + " " + peixe.getIdAquario() + " AGUA SALGADA");
             }
         }
     }

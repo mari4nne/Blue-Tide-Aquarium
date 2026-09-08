@@ -1,15 +1,22 @@
 package repository;
 
 import business.Peixe;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class PeixeRepository {
     private List<Peixe> peixes;
+    private static PeixeRepository instance;
 
-    public PeixeRepository() {
+    private PeixeRepository() {
         peixes = new ArrayList<>();
+    }
+
+    public static PeixeRepository getInstance() {
+        if (instance == null) {
+            instance = new PeixeRepository();
+        }
+        return instance;
     }
 
     public boolean add(Peixe peixe) {

@@ -2,14 +2,23 @@ package repository;
 import java.util.ArrayList;
 import java.util.List;
 import business.Aquario;
+import business.AquarioController;
 import business.Usuario;
 
 public class AquarioRepository {
 
     private final List<Aquario> aquarios;
+    private static AquarioRepository instance;
 
-    public AquarioRepository(){
+    private AquarioRepository(){
         aquarios = new ArrayList<>();
+    }
+
+    public static AquarioRepository getInstance() {
+        if (instance == null) {
+            instance = new AquarioRepository();
+        }
+        return instance;
     }
 
     public boolean add(Aquario aquario){
@@ -62,4 +71,3 @@ public class AquarioRepository {
         return aux;
     }
 }
-

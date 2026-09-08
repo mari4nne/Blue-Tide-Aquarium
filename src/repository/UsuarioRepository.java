@@ -1,15 +1,24 @@
 package repository;
 
 import business.Usuario;
+import business.UsuarioController;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioRepository {
     private List<Usuario> usuarios;
+    private static UsuarioRepository instance;
 
-    public UsuarioRepository(){
+    private UsuarioRepository(){
         usuarios = new ArrayList<>();
+    }
+
+    public static UsuarioRepository getInstance(){
+        if (instance == null) {
+            instance = new UsuarioRepository();
+        }
+        return instance;
     }
 
     public boolean add(Usuario usuario){
@@ -42,7 +51,7 @@ public class UsuarioRepository {
             return null;
         for (Usuario usuario : usuarios) {
             if (usuario.getId() == id)
-                return new Usuario(usuario);
+                return usuario;
         }
         return null;
     }

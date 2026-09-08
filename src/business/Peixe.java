@@ -17,7 +17,7 @@ public class Peixe {
     }
 
     public static Peixe getInstance(String nomePeixe, TipoAgua tipoAgua, int idAquario, int idUsuario) {
-        if (!nomePeixe.isBlank() && tipoAgua != null) {
+        if (!nomePeixe.isBlank() && tipoAgua != null && idAquario >= 0 && idUsuario >= 0) {
             return new Peixe(nomePeixe, tipoAgua, idAquario, idUsuario);
         } else {
             return null;
@@ -28,8 +28,9 @@ public class Peixe {
         this.idPeixe = outro.idPeixe;
         this.nomePeixe = outro.nomePeixe;
         this.tipoAgua = outro.tipoAgua;
+        this.idAquario = outro.idAquario;
+        this.idUsuario = outro.idUsuario;
     }
-
 
     public TipoAgua getTipoAgua() {
         return tipoAgua;
@@ -57,9 +58,5 @@ public class Peixe {
 
     public int getIdUsuario() {
         return idUsuario;
-    }
-
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
     }
 }
