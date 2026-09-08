@@ -10,12 +10,14 @@ public class Aquario {
     private TipoAgua tipo;
     private int idUsuario;
     private LocalTime ultimaAlimentacao;
-
     private Aquario(){
+
         this.id = geraId++;
+
     }
 
     private Aquario(String codigo, float volume, TipoAgua tipo, int idUsuario){
+
         this();
         this.codigo = codigo;
         this.volume = volume;
@@ -25,6 +27,7 @@ public class Aquario {
     }
 
     public Aquario(Aquario a){
+
         this.id = a.id;
         this.codigo = a.codigo;
         this.volume = a.volume;
@@ -35,9 +38,11 @@ public class Aquario {
     }
 
     public static Aquario getInstance(String codigo, float volume, TipoAgua tipo, int idUsuario){
-        if(!codigo.isBlank() && volume > 0 && tipo != null && idUsuario > 0)
+
+        if(!codigo.isBlank() && volume > 0 && tipo != null && idUsuario >= 0)
             return new Aquario(codigo, volume, tipo, idUsuario);
         return null;
+
     }
 
     public String getCodigo(){
@@ -45,7 +50,8 @@ public class Aquario {
     }
 
     public void setCodigo(String codigo){
-        this.codigo = codigo;
+        if(!codigo.isBlank())
+            this.codigo = codigo;
     }
 
     public int getId(){
@@ -57,7 +63,7 @@ public class Aquario {
     }
 
     public void setVolume(float volume){
-        if (volume > 0)
+        if(volume > 0)
             this.volume = volume;
     }
 
@@ -66,7 +72,7 @@ public class Aquario {
     }
 
     public void setTipo(TipoAgua tipo){
-        if (tipo != null)
+        if(tipo != null)
             this.tipo = tipo;
     }
 
@@ -75,7 +81,7 @@ public class Aquario {
     }
 
     public void setIdUsuario(int idUsuario){
-        if (idUsuario > 0)
+        if(idUsuario >= 0)
             this.idUsuario = idUsuario;
     }
 
@@ -84,11 +90,13 @@ public class Aquario {
     }
 
     public void setUltimaAlimentacao(LocalTime ultimaAlimentacao){
-        if (ultimaAlimentacao != null)
+
+        if(ultimaAlimentacao != null)
             this.ultimaAlimentacao = ultimaAlimentacao;
     }
 
     public LocalTime getProximaAlimentacao(){
+
         if(ultimaAlimentacao == null)
             return null;
         return ultimaAlimentacao.plusHours(10);
