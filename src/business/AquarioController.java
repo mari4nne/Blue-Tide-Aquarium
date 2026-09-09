@@ -54,4 +54,25 @@ public class AquarioController {
             return usuario.getNome();
         return "Nenhum";
     }
+
+    public boolean verifyUsuarioExistence (int idUsuario) {
+        if (idUsuario < 0) return false;
+        else {
+            Usuario verifica = repoUsuario.getById(idUsuario);
+            if (verifica != null) return true;
+            else return false;
+        }
+    }
+
+    public Aquario getBySequence(int cod){
+        if (cod < 0)
+            return null;
+
+        List<Aquario> aquarios = getAll();
+
+        if (aquarios.size() <= cod)
+            return null;
+
+        return aquarios.get(cod);
+    }
 }

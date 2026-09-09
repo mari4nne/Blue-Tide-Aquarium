@@ -24,7 +24,7 @@ public class UIPeixe {
     public void add(){
         String nome = "";
         do {
-            System.out.println("Nome: ");
+            System.out.print("Nome: ");
             nome = scl.nextLine();
         } while (nome.isBlank());
 
@@ -37,7 +37,7 @@ public class UIPeixe {
             System.out.println("Tipos:");
             System.out.println("1: Água doce;");
             System.out.println("2: Água salgada;");
-            System.out.println("Tipo escolhido:");
+            System.out.print("Tipo escolhido: ");
             escolha = scn.nextInt();
 
             if (escolha == 1) {
@@ -52,12 +52,12 @@ public class UIPeixe {
 
         System.out.println();
 
-        System.out.println("Digite o id do aquário ao qual o peixe pertence:");
+        System.out.print("Digite o id do aquário ao qual o peixe pertence: ");
         int idAquario = scn.nextInt();
 
         System.out.println();
 
-        System.out.println("Digite o id do usuário ao qual o peixe pertence:");
+        System.out.print("Digite o id do usuário ao qual o peixe pertence: ");
         int idUsuario = scn.nextInt();
 
         if (controlador.verifyUsuarioExistence(idUsuario) && controlador.verifyAquarioExistence(idAquario)) {
@@ -74,31 +74,22 @@ public class UIPeixe {
     }
 
     public void switchAquario() {
-        System.out.println("Verifique qual peixe deseja mudar de aquário:");
         showAll();
 
-        System.out.println();
-        System.out.println("Insira abaixo o id do peixe:");
-        int codPeixe = scn.nextInt();
-
+        int codPeixe;
         do {
-            System.out.println("Insira um valor válido");
-            codPeixe = scn.nextInt();
+            System.out.print("Insira o código do peixe: ");
+            codPeixe = scn.nextInt() - 1;
         } while (codPeixe < 0);
 
-        Peixe verificando = controlador.getById(codPeixe);
+        Peixe verificando = controlador.getBySequence(codPeixe);
+        if (verificando == null) {
+            System.out.println("Peixe não encontrado.");
+            return;
+        }
 
-        System.out.println();
-        System.out.println("Insira abaixo o id do aquário pra onde deseja transferir:");
+        System.out.print("Insira o id do aquário pra onde deseja transferir: ");
         int codAquario = scn.nextInt();
-
-        do {
-            System.out.println("Insira um valor válido");
-            codAquario = scn.nextInt();
-        } while (codAquario < 0);
-
-        System.out.println();
-        System.out.println("Verificando tipo do aquário...");
 
         if (controlador.verifyTipoAgua(verificando, codAquario)
                 && controlador.verifyDonoAquario(verificando, codAquario)
@@ -118,13 +109,13 @@ public class UIPeixe {
     public void update(){
         showAll();
 
-        int codigo;
+        int cod;
         do {
-            System.out.println("Código do peixe:");
-            codigo = scn.nextInt();
-        } while (codigo < 0);
+            System.out.print("Código do peixe: ");
+            cod = scn.nextInt() - 1;
+        } while (cod < 0);
 
-        Peixe peixeAlterado = controlador.getById(codigo);
+        Peixe peixeAlterado = controlador.getBySequence(cod);
         if (peixeAlterado == null) {
             System.out.println("Peixe não encontrado.");
             return;
@@ -133,12 +124,11 @@ public class UIPeixe {
         String nome = null;
         int escolha;
         do {
-            System.out.println("Alterar nome:");
-            System.out.println("1) - Sim");
-            System.out.println("2) - Não");
+            System.out.println("Alterar nome: (1) Sim, (2) Não");
+            System.out.print("Escolha: ");
             escolha = scn.nextInt();
             if (escolha == 1) {
-                System.out.println("Novo nome do peixe:");
+                System.out.print("Novo nome do peixe: ");
                 nome = scl.nextLine();
             }
         } while (escolha != 1 && escolha != 2);
@@ -156,13 +146,17 @@ public class UIPeixe {
 
     public void delete(){
         showAll();
-        int codigo;
+        int cod;
         do {
-            System.out.println("Codigo do peixe:");
-            codigo = scn.nextInt();
-        } while (codigo < 0);
+            System.out.print("Código do peixe: ");
+            cod = scn.nextInt() - 1;
+        } while (cod < 0);
 
-        Peixe peixeEncontrado = controlador.getById(codigo);
+        Peixe peixeEncontrado = controlador.getBySequence(cod);
+        if (peixeEncontrado == null) {
+            System.out.println("Peixe não encontrado.");
+            return;
+        }
 
         Peixe peixeRecuperado = controlador.deleteById(peixeEncontrado.getIdPeixe());
 
@@ -207,14 +201,17 @@ public class UIPeixe {
     public void showAll(){
         System.out.println();
         System.out.println("Peixes:");
+        System.out.println("Cod - Nome - AquarioID - Água");
         List<Peixe> peixes = controlador.getAll();
-        for (Peixe peixe : peixes) {
+        for (int i = 0; i < peixes.size(); i++) {
+            Peixe peixe = peixes.get(i);
             if (peixe.getTipoAgua() == TipoAgua.DOCE) {
-                System.out.println(peixe.getIdPeixe() + " " + peixe.getNomePeixe() + " " + peixe.getIdAquario() + " " + peixe.getIdAquario() + " AGUA DOCE");
+                System.out.println((i + 1) + "  " + peixe.getNomePeixe() + "  " + peixe.getIdAquario() + "  AGUA DOCE");
             }
             if (peixe.getTipoAgua() == TipoAgua.SALGADA) {
-                System.out.println(peixe.getIdPeixe() + " " + peixe.getNomePeixe() + " " + peixe.getIdAquario() + " " + peixe.getIdAquario() + " AGUA SALGADA");
+                System.out.println((i + 1) + "  " + peixe.getNomePeixe() + "  " + peixe.getIdAquario() + "  AGUA SALGADA");
             }
         }
+        System.out.println();
     }
 }

@@ -91,4 +91,16 @@ public class PeixeController {
             else return false;
         }
     }
+
+    public Peixe getBySequence(int cod){
+        if (cod < 0)
+            return null;
+
+        List<Peixe> peixes = getAll();
+
+        if (peixes.size() <= cod)
+            return null;
+
+        return peixes.get(cod);
+    }
 }

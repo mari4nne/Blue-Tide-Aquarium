@@ -2,8 +2,7 @@ package repository;
 import java.util.ArrayList;
 import java.util.List;
 import business.Aquario;
-import business.AquarioController;
-import business.Usuario;
+import business.TipoAgua;
 
 public class AquarioRepository {
 
@@ -12,6 +11,8 @@ public class AquarioRepository {
 
     private AquarioRepository(){
         aquarios = new ArrayList<>();
+        aquarios.add(Aquario.getInstance("AQ-01", 50.0f, TipoAgua.DOCE, 0));
+        aquarios.add(Aquario.getInstance("AQ-02", 120.5f, TipoAgua.SALGADA, 1));
     }
 
     public static AquarioRepository getInstance() {

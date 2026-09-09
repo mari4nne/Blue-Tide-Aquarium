@@ -11,7 +11,7 @@ public class Main {
     private static final UIPeixe uiPeixe = new UIPeixe();
     private static final UIAquario uiAquario = new UIAquario();
 
-    public static void main() {
+    public static void main(String[] args) {
         int opcao;
 
         do {
@@ -148,6 +148,7 @@ public class Main {
             System.out.println("3: Excluir aquario");
             System.out.println("4: Buscar aquario pelo ID");
             System.out.println("5: Listar aquarios");
+            System.out.println("6: Alimentar aquario");
             System.out.println("0: Sair");
             System.out.print("Sua escolha: ");
             escolha = scn.nextInt();
@@ -167,6 +168,9 @@ public class Main {
                     break;
                 case 5:
                     uiAquario.listar();
+                    break;
+                case 6:
+                    uiAquario.alimentar();
                     break;
                 case 0:
                     System.out.println("Finalizando...");

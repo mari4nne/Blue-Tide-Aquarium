@@ -150,6 +150,10 @@ public class UIUsuario {
         } while (cod < 0);
 
         Usuario usuarioEncontrado = controlador.getBySequence(cod);
+        if (usuarioEncontrado == null) {
+            System.out.println("Usuario nao encontrado.");
+            return;
+        }
 
         Usuario usuarioRecuperado = controlador.deleteById(usuarioEncontrado.getId());
         if (usuarioRecuperado != null)
@@ -180,6 +184,7 @@ public class UIUsuario {
     public void showAll(){
         System.out.println();
         System.out.println("Usuarios:");
+        System.out.println("Cod - Nome - Tipo - Telefone");
         List<Usuario> usuarios = controlador.getAll();
         for (int i = 0; i < usuarios.size(); i++) {
             if (usuarios.get(i).getTipo() == TipoUsuario.PADRAO)

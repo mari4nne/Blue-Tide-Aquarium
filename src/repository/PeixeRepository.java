@@ -1,6 +1,8 @@
 package repository;
 
 import business.Peixe;
+import business.TipoAgua;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,8 @@ public class PeixeRepository {
 
     private PeixeRepository() {
         peixes = new ArrayList<>();
+        peixes.add(Peixe.getInstance("Nemo", TipoAgua.SALGADA, 1, 1));
+        peixes.add(Peixe.getInstance("Beta", TipoAgua.DOCE, 0, 0));
     }
 
     public static PeixeRepository getInstance() {
@@ -43,7 +47,12 @@ public class PeixeRepository {
         if (id < 0)
             return null;
 
-        return peixes.remove(id);
+        for (int i = 0; i < peixes.size(); i++) {
+            if (peixes.get(i).getIdPeixe() == id) {
+                return peixes.remove(i);
+            }
+        }
+        return null;
     }
 
     public Peixe getById(int id) {

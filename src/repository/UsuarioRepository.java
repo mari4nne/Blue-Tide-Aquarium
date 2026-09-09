@@ -1,7 +1,7 @@
 package repository;
 
+import business.TipoUsuario;
 import business.Usuario;
-import business.UsuarioController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,8 @@ public class UsuarioRepository {
 
     private UsuarioRepository(){
         usuarios = new ArrayList<>();
+        usuarios.add(Usuario.getInstance("Vic", TipoUsuario.ADMIN, "91111-1111"));
+        usuarios.add(Usuario.getInstance("Joaozinho", TipoUsuario.PADRAO, "92222-2222"));
     }
 
     public static UsuarioRepository getInstance(){
@@ -43,7 +45,12 @@ public class UsuarioRepository {
         if (id < 0)
             return null;
 
-        return usuarios.remove(id);
+        for (int i = 0; i < usuarios.size(); i++) {
+            if (usuarios.get(i).getId() == id) {
+                return usuarios.remove(i);
+            }
+        }
+        return null;
     }
 
     public Usuario getById(int id){
