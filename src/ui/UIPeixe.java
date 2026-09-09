@@ -13,7 +13,7 @@ public class UIPeixe {
     private final PeixeController controlador;
 
     private Scanner scn;
-    private Scanner scl; // Scanner para ler strings
+    private Scanner scl;
 
     public UIPeixe(){
         controlador = new PeixeController();

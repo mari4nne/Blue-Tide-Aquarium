@@ -7,9 +7,11 @@ public class Usuario {
     private String nome;
     private TipoUsuario tipo;
     private String fone;
+    private boolean excluido;
 
     private Usuario(){
         this.id = novoId++;
+        this.excluido = false;
     }
 
     private Usuario(String nome, TipoUsuario tipo, String fone){
@@ -61,5 +63,13 @@ public class Usuario {
     public void setFone(String fone) {
         if (!fone.isBlank())
             this.fone = fone;
+    }
+
+    public boolean isExcluido() {
+        return excluido;
+    }
+
+    public void setExcluido(boolean excluido) {
+        this.excluido = excluido;
     }
 }

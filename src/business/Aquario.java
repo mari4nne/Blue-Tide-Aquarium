@@ -10,10 +10,11 @@ public class Aquario {
     private TipoAgua tipo;
     private int idUsuario;
     private LocalTime ultimaAlimentacao;
+    private boolean excluido;
+
     private Aquario(){
-
         this.id = geraId++;
-
+        this.excluido = false;
     }
 
     private Aquario(String codigo, float volume, TipoAgua tipo, int idUsuario){
@@ -80,11 +81,6 @@ public class Aquario {
         return idUsuario;
     }
 
-    public void setIdUsuario(int idUsuario){
-        if(idUsuario >= 0)
-            this.idUsuario = idUsuario;
-    }
-
     public LocalTime getUltimaAlimentacao(){
         return ultimaAlimentacao;
     }
@@ -103,4 +99,11 @@ public class Aquario {
 
     }
 
+    public boolean isExcluido() {
+        return excluido;
+    }
+
+    public void setExcluido(boolean excluido) {
+        this.excluido = excluido;
+    }
 }

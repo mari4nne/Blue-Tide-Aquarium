@@ -11,7 +11,7 @@ public class UIUsuario {
     private final UsuarioController controlador;
 
     private Scanner scn;
-    private Scanner scl; //Usado para ler Strings
+    private Scanner scl;
 
     public UIUsuario(){
         controlador = new UsuarioController();

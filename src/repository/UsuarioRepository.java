@@ -33,7 +33,7 @@ public class UsuarioRepository {
         if (usuarioAlterado == null)
             return false;
         for (int i = 0; i < usuarios.size(); i++) {
-            if (usuarios.get(i).getId() == usuarioAlterado.getId()){
+            if (usuarios.get(i).getId() == usuarioAlterado.getId() && !usuarios.get(i).isExcluido()){
                 usuarios.set(i, usuarioAlterado);
                 return true;
             }
@@ -46,8 +46,9 @@ public class UsuarioRepository {
             return null;
 
         for (int i = 0; i < usuarios.size(); i++) {
-            if (usuarios.get(i).getId() == id) {
-                return usuarios.remove(i);
+            if (usuarios.get(i).getId() == id && !usuarios.get(i).isExcluido()) {
+                usuarios.get(i).setExcluido(true);
+                return new Usuario(usuarios.get(i));
             }
         }
         return null;
@@ -58,7 +59,7 @@ public class UsuarioRepository {
             return null;
         for (Usuario usuario : usuarios) {
             if (usuario.getId() == id)
-                return usuario;
+                return new Usuario(usuario);
         }
         return null;
     }
@@ -67,7 +68,9 @@ public class UsuarioRepository {
         List<Usuario> aux = new ArrayList<>();
 
         for (Usuario usuario : usuarios) {
-            aux.add(new Usuario(usuario));
+            if (!usuario.isExcluido()) {
+                aux.add(new Usuario(usuario));
+            }
         }
 
         return aux;

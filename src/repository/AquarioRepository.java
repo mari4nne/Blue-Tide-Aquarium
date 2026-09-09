@@ -36,7 +36,7 @@ public class AquarioRepository {
             return false;
 
         for(int i = 0; i < aquarios.size(); i++){
-            if(aquarios.get(i).getId() == aquarioAlterado.getId()){
+            if(aquarios.get(i).getId() == aquarioAlterado.getId() && !aquarios.get(i).isExcluido()){
                 aquarios.set(i, aquarioAlterado);
                 return true;
             }
@@ -46,8 +46,9 @@ public class AquarioRepository {
 
     public Aquario deleteById(int id){
         for(int i = 0; i < aquarios.size(); i++){
-            if(aquarios.get(i).getId() == id){
-                return aquarios.remove(i);
+            if(aquarios.get(i).getId() == id && !aquarios.get(i).isExcluido()){
+                aquarios.get(i).setExcluido(true);
+                return new Aquario(aquarios.get(i));
             }
         }
         return null;
@@ -66,7 +67,9 @@ public class AquarioRepository {
         List<Aquario> aux = new ArrayList<>();
 
         for (Aquario aquario : aquarios) {
-            aux.add(new Aquario(aquario));
+            if(!aquario.isExcluido()) {
+                aux.add(new Aquario(aquario));
+            }
         }
 
         return aux;

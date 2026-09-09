@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 public class Main {
     private static Scanner scn = new Scanner(System.in);
-    private static Scanner scl = new Scanner(System.in); //Usado para ler Strings
     private static final UIUsuario uiUsuario = new UIUsuario();
     private static final UIPeixe uiPeixe = new UIPeixe();
     private static final UIAquario uiAquario = new UIAquario();
