@@ -49,6 +49,14 @@ public class PeixeController {
         return repoPeixe.getAll();
     }
 
+    public List<Usuario> getAllUsuarios(){
+        return repoUsuario.getAll();
+    }
+
+    public List<Aquario> getAllAquarios(){
+        return repoAquario.getAll();
+    }
+
     public boolean verifyTipoAgua (Peixe p, int codAquario) {
         if (p != null) {
             Aquario a = repoAquario.getById((codAquario));
@@ -57,6 +65,14 @@ public class PeixeController {
         } else {
             return false;
         }
+    }
+
+    public String buscarNomeUsuarioPorId(int idUsuario){
+        Usuario usuario = repoUsuario.getById(idUsuario);
+
+        if (usuario != null)
+            return usuario.getNome();
+        return null;
     }
 
     public boolean verifyDonoAquario (Peixe p, int codAquario) {

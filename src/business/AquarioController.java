@@ -41,6 +41,10 @@ public class AquarioController {
         return repoAquario.getAll();
     }
 
+    public List<Usuario> getAllUsuarios(){
+        return repoUsuario.getAll();
+    }
+
     public boolean pertenceAoUsuario(Aquario aquario, int idUsuario){
         if(aquario == null || idUsuario < 0)
             return false;
@@ -52,7 +56,7 @@ public class AquarioController {
 
         if (usuario != null)
             return usuario.getNome();
-        return "Nenhum";
+        return null;
     }
 
     public boolean verifyUsuarioExistence (int idUsuario) {

@@ -1,10 +1,6 @@
 package ui;
 
-import business.Peixe;
-import business.PeixeController;
-import business.TipoAgua;
-import business.Usuario;
-import business.Aquario;
+import business.*;
 
 import java.util.List;
 import java.util.Scanner;
@@ -15,13 +11,13 @@ public class UIPeixe {
     private Scanner scn;
     private Scanner scl;
 
-    public UIPeixe(){
+    public UIPeixe() {
         controlador = new PeixeController();
         scn = new Scanner(System.in);
         scl = new Scanner(System.in);
     }
 
-    public void add(){
+    public void add() {
         String nome = "";
         do {
             System.out.print("Nome: ");
@@ -52,10 +48,14 @@ public class UIPeixe {
 
         System.out.println();
 
+        listarAquarios();
+
         System.out.print("Digite o id do aquário ao qual o peixe pertence: ");
         int idAquario = scn.nextInt();
 
         System.out.println();
+
+        listarUsuarios();
 
         System.out.print("Digite o id do usuário ao qual o peixe pertence: ");
         int idUsuario = scn.nextInt();
@@ -63,7 +63,7 @@ public class UIPeixe {
         if (controlador.verifyUsuarioExistence(idUsuario) && controlador.verifyAquarioExistence(idAquario)) {
             Peixe novoPeixe = Peixe.getInstance(nome, tipo, idAquario, idUsuario);
 
-            if (novoPeixe != null && controlador.add(novoPeixe)){
+            if (novoPeixe != null && controlador.add(novoPeixe)) {
                 System.out.println("Peixe cadastrado!");
             } else {
                 System.out.println("Falha ao cadastrar peixe!");
@@ -88,6 +88,8 @@ public class UIPeixe {
             return;
         }
 
+        listarAquarios();
+
         System.out.print("Insira o id do aquário pra onde deseja transferir: ");
         int codAquario = scn.nextInt();
 
@@ -106,7 +108,7 @@ public class UIPeixe {
         }
     }
 
-    public void update(){
+    public void update() {
         showAll();
 
         int cod;
@@ -144,7 +146,7 @@ public class UIPeixe {
         }
     }
 
-    public void delete(){
+    public void delete() {
         showAll();
         int cod;
         do {
@@ -167,7 +169,7 @@ public class UIPeixe {
         }
     }
 
-    public void getById(){
+    public void getById() {
         int codigo;
         do {
             System.out.println("Id do peixe que deseja excluir:");
@@ -198,7 +200,7 @@ public class UIPeixe {
         }
     }
 
-    public void showAll(){
+    public void showAll() {
         System.out.println();
         System.out.println("Peixes:");
         System.out.println("Cod - Nome - AquarioID - Água");
@@ -213,5 +215,31 @@ public class UIPeixe {
             }
         }
         System.out.println();
+    }
+
+    public void listarAquarios() {
+        System.out.println();
+        System.out.println("Aquários:");
+        System.out.println("Cod - CodIdentif - Volume - Tipo - Dono");
+        List<Aquario> aquarios = controlador.getAllAquarios();
+        for (int i = 0; i < aquarios.size(); i++) {
+            Aquario aquario = aquarios.get(i);
+            String nomeUsuario = controlador.buscarNomeUsuarioPorId(aquario.getIdUsuario());
+            System.out.println(aquario.getId() + "  " + aquario.getCodigo() + "  " + aquario.getVolume() + "L  " + aquario.getTipo() + "  " + nomeUsuario);
+        }
+        System.out.println();
+    }
+
+    public void listarUsuarios() {
+        System.out.println();
+        System.out.println("Usuarios:");
+        System.out.println("Cod - Nome - Tipo - Telefone");
+        List<Usuario> usuarios = controlador.getAllUsuarios();
+        for (int i = 0; i < usuarios.size(); i++) {
+            if (usuarios.get(i).getTipo() == TipoUsuario.PADRAO)
+                System.out.println(usuarios.get(i).getId() + "  " + usuarios.get(i).getNome() + "  " + "PADRAO" + "  " + usuarios.get(i).getFone());
+            else
+                System.out.println(usuarios.get(i).getId() + "  " + usuarios.get(i).getNome() + "  " + "ADMIN" + "  " + usuarios.get(i).getFone());
+        }
     }
 }

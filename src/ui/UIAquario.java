@@ -1,9 +1,6 @@
 package ui;
 
-import business.Aquario;
-import business.AquarioController;
-import business.TipoAgua;
-import business.Usuario;
+import business.*;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -46,6 +43,8 @@ public class UIAquario {
             tipo = TipoAgua.DOCE;
         else
             tipo = TipoAgua.SALGADA;
+
+        listarUsuarios();
 
         int idUsuario;
         do {
@@ -191,6 +190,19 @@ public class UIAquario {
             System.out.println((i + 1) + "  " + aquario.getCodigo() + "  " + aquario.getVolume() + "L  " + aquario.getTipo() + "  " + nomeUsuario);
         }
         System.out.println();
+    }
+
+    public void listarUsuarios() {
+        System.out.println();
+        System.out.println("Usuarios:");
+        System.out.println("Cod - Nome - Tipo - Telefone");
+        List<Usuario> usuarios = controlador.getAllUsuarios();
+        for (int i = 0; i < usuarios.size(); i++) {
+            if (usuarios.get(i).getTipo() == TipoUsuario.PADRAO)
+                System.out.println(usuarios.get(i).getId() + "  " + usuarios.get(i).getNome() + "  " + "PADRAO" + "  " + usuarios.get(i).getFone());
+            else
+                System.out.println(usuarios.get(i).getId() + "  " + usuarios.get(i).getNome() + "  " + "ADMIN" + "  " + usuarios.get(i).getFone());
+        }
     }
 
     public void alimentar() {
