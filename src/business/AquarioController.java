@@ -52,7 +52,7 @@ public class AquarioController {
     }
 
     public String buscarNomeUsuarioPorId(int idUsuario){
-        Usuario usuario = repoUsuario.getById(idUsuario);
+        Usuario usuario = repoUsuario.getByIdUniversal(idUsuario);
 
         if (usuario != null)
             return usuario.getNome();
@@ -60,11 +60,14 @@ public class AquarioController {
     }
 
     public boolean verifyUsuarioExistence (int idUsuario) {
-        if (idUsuario < 0) return false;
+        if (idUsuario < 0)
+            return false;
         else {
             Usuario verifica = repoUsuario.getById(idUsuario);
-            if (verifica != null) return true;
-            else return false;
+            if (verifica != null)
+                return true;
+            else
+                return false;
         }
     }
 

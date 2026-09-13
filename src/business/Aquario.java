@@ -92,11 +92,9 @@ public class Aquario {
     }
 
     public LocalTime getProximaAlimentacao(){
-
         if(ultimaAlimentacao == null)
             return null;
         return ultimaAlimentacao.plusHours(10);
-
     }
 
     public boolean isExcluido() {

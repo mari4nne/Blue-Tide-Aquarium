@@ -56,6 +56,15 @@ public class AquarioRepository {
 
     public Aquario getById(int id){
         for(Aquario aquario : aquarios){
+            if(aquario.getId() == id && !aquario.isExcluido()){
+                return new Aquario(aquario);
+            }
+        }
+        return null;
+    }
+
+    public Aquario getByIdUniversal(int id){
+        for(Aquario aquario : aquarios){
             if(aquario.getId() == id){
                 return new Aquario(aquario);
             }

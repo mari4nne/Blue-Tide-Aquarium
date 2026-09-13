@@ -58,6 +58,16 @@ public class UsuarioRepository {
         if (id < 0)
             return null;
         for (Usuario usuario : usuarios) {
+            if (usuario.getId() == id && !usuario.isExcluido())
+                return new Usuario(usuario);
+        }
+        return null;
+    }
+
+    public Usuario getByIdUniversal(int id){
+        if (id < 0)
+            return null;
+        for (Usuario usuario : usuarios) {
             if (usuario.getId() == id)
                 return new Usuario(usuario);
         }
