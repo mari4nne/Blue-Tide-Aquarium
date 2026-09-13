@@ -126,16 +126,23 @@ public class UIPeixe {
         }
 
         String nome = null;
+        boolean alterado = false;
         int escolha;
         do {
             System.out.println("Alterar nome: (1) Sim, (2) Não");
             System.out.print("Escolha: ");
             escolha = scn.nextInt();
             if (escolha == 1) {
+                alterado = true;
                 System.out.print("Novo nome do peixe: ");
                 nome = scl.nextLine();
             }
         } while (escolha != 1 && escolha != 2);
+
+        if (!alterado) {
+            System.out.println("Peixe sem alteraçoes.");
+            return;
+        }
 
         if (nome != null) {
             peixeAlterado.setNomePeixe(nome);

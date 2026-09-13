@@ -81,12 +81,14 @@ public class UIUsuario {
         String nome = null;
         String fone = null;
         TipoUsuario tipo = null;
+        boolean alterado = false;
         int escolha;
         do {
             System.out.println("Alterar nome: (1) Sim, (2) nao");
             System.out.print("Escolha: ");
             escolha = scn.nextInt();
             if (escolha == 1) {
+                alterado = true;
                 System.out.print("Nome: ");
                 nome = scl.nextLine();
             }
@@ -97,6 +99,7 @@ public class UIUsuario {
             System.out.print("Escolha: ");
             escolha = scn.nextInt();
             if (escolha == 1) {
+                alterado = true;
                 int preferencia;
 
                 do {
@@ -121,12 +124,18 @@ public class UIUsuario {
             System.out.print("Escolha: ");
             escolha = scn.nextInt();
             if (escolha == 1) {
+                alterado = true;
                 do {
                     System.out.print("Novo telefone (ex: 91111-1111): ");
                     fone = scl.nextLine();
                 } while (fone.length() != 10);
             }
         } while (escolha != 1 && escolha != 2);
+
+        if (!alterado) {
+            System.out.println("Usuario sem alteraçoes.");
+            return;
+        }
 
         if (nome != null)
             usuarioAlterado.setNome(nome);

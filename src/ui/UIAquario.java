@@ -76,12 +76,14 @@ public class UIAquario {
             return;
         }
 
+        boolean alterado = false;
         int escolha;
         do {
             System.out.println("Alterar código: (1) Sim, (2) Não");
             System.out.print("Escolha: ");
             escolha = scn.nextInt();
             if (escolha == 1) {
+                alterado = true;
                 String codigo = "";
                 do {
                     System.out.println("Digite o novo código:");
@@ -97,6 +99,7 @@ public class UIAquario {
             System.out.print("Escolha: ");
             escolha = scn.nextInt();
             if (escolha == 1) {
+                alterado = true;
                 float volume = 0;
                 do {
                     System.out.println("Digite o novo volume:");
@@ -112,6 +115,7 @@ public class UIAquario {
             System.out.print("Escolha: ");
             escolha = scn.nextInt();
             if (escolha == 1) {
+                alterado = true;
                 TipoAgua tipo = null;
                 int opcao;
                 do {
@@ -129,6 +133,11 @@ public class UIAquario {
                 aquario.setTipo(tipo);
             }
         } while (escolha != 1 && escolha != 2);
+
+        if (!alterado) {
+            System.out.println("Aquário sem alteraçoes.");
+            return;
+        }
 
         if (controlador.update(aquario)) {
             System.out.println("Aquário atualizado com sucesso!");
