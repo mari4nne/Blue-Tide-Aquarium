@@ -68,11 +68,19 @@ public class PeixeController {
     }
 
     public String buscarNomeUsuarioPorId(int idUsuario){
-        Usuario usuario = repoUsuario.getById(idUsuario);
+        Usuario usuario = repoUsuario.getByIdUniversal(idUsuario);
 
         if (usuario != null)
             return usuario.getNome();
         return null;
+    }
+
+    public int getUserByAquarioId(int idUsuario){
+        Usuario usuario = repoUsuario.getByIdUniversal(idUsuario);
+
+        if (usuario != null)
+            return usuario.getId();
+        return -1;
     }
 
     public boolean verifyDonoAquario (Peixe p, int codAquario) {

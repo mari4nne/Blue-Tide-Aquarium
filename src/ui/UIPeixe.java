@@ -55,10 +55,12 @@ public class UIPeixe {
 
         System.out.println();
 
-        listarUsuarios();
+        int idUsuario = controlador.getUserByAquarioId(idAquario);
 
-        System.out.print("Digite o id do usuário ao qual o peixe pertence: ");
-        int idUsuario = scn.nextInt();
+        if (idUsuario == -1) {
+            System.out.println("Aquario invalido.");
+            return;
+        }
 
         if (controlador.verifyUsuarioExistence(idUsuario) && controlador.verifyAquarioExistence(idAquario)) {
             Peixe novoPeixe = Peixe.getInstance(nome, tipo, idAquario, idUsuario);
@@ -170,20 +172,21 @@ public class UIPeixe {
     }
 
     public void getById() {
+        showAllWithId();
         int codigo;
         do {
-            System.out.println("Id do peixe que deseja excluir:");
+            System.out.println("Id do peixe:");
             codigo = scn.nextInt();
         } while (codigo < 0);
 
-        Peixe peixeEncontrado = controlador.getById(codigo);
+        Peixe peixeEncontrado = controlador.getById(controlador.getBySequence(codigo).getIdPeixe());
 
         if (peixeEncontrado != null && peixeEncontrado.getTipoAgua() == TipoAgua.DOCE) {
             System.out.println();
             System.out.println("Nome: " + peixeEncontrado.getNomePeixe());
             System.out.println("Tipo de água: Doce");
             System.out.println("Id do aquário: " + peixeEncontrado.getIdAquario());
-            System.out.println("Id do usuário: " + peixeEncontrado.getIdUsuario());
+            System.out.println("Dono: " + controlador.buscarNomeUsuarioPorId(peixeEncontrado.getIdUsuario()));
         }
 
         if (peixeEncontrado != null && peixeEncontrado.getTipoAgua() == TipoAgua.SALGADA) {
@@ -191,7 +194,7 @@ public class UIPeixe {
             System.out.println("Nome: " + peixeEncontrado.getNomePeixe());
             System.out.println("Tipo de água: Salgada");
             System.out.println("Id do aquário: " + peixeEncontrado.getIdAquario());
-            System.out.println("Id do usuário: " + peixeEncontrado.getIdUsuario());
+            System.out.println("Dono: " + controlador.buscarNomeUsuarioPorId(peixeEncontrado.getIdUsuario()));
         }
 
         if (peixeEncontrado == null) {
@@ -217,6 +220,23 @@ public class UIPeixe {
         System.out.println();
     }
 
+    public void showAllWithId() {
+        System.out.println();
+        System.out.println("Peixes:");
+        System.out.println("Cod - Nome - AquarioID - Água");
+        List<Peixe> peixes = controlador.getAll();
+        for (int i = 0; i < peixes.size(); i++) {
+            Peixe peixe = peixes.get(i);
+            if (peixe.getTipoAgua() == TipoAgua.DOCE) {
+                System.out.println(peixe.getIdPeixe() + "  " + peixe.getNomePeixe() + "  " + peixe.getIdAquario() + "  AGUA DOCE");
+            }
+            if (peixe.getTipoAgua() == TipoAgua.SALGADA) {
+                System.out.println(peixe.getIdPeixe() + "  " + peixe.getNomePeixe() + "  " + peixe.getIdAquario() + "  AGUA SALGADA");
+            }
+        }
+        System.out.println();
+    }
+
     public void listarAquarios() {
         System.out.println();
         System.out.println("Aquários:");
@@ -228,18 +248,5 @@ public class UIPeixe {
             System.out.println(aquario.getId() + "  " + aquario.getCodigo() + "  " + aquario.getVolume() + "L  " + aquario.getTipo() + "  " + nomeUsuario);
         }
         System.out.println();
-    }
-
-    public void listarUsuarios() {
-        System.out.println();
-        System.out.println("Usuarios:");
-        System.out.println("Cod - Nome - Tipo - Telefone");
-        List<Usuario> usuarios = controlador.getAllUsuarios();
-        for (int i = 0; i < usuarios.size(); i++) {
-            if (usuarios.get(i).getTipo() == TipoUsuario.PADRAO)
-                System.out.println(usuarios.get(i).getId() + "  " + usuarios.get(i).getNome() + "  " + "PADRAO" + "  " + usuarios.get(i).getFone());
-            else
-                System.out.println(usuarios.get(i).getId() + "  " + usuarios.get(i).getNome() + "  " + "ADMIN" + "  " + usuarios.get(i).getFone());
-        }
     }
 }
