@@ -1,5 +1,7 @@
 package business;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 public class Aquario {
 
@@ -9,7 +11,7 @@ public class Aquario {
     private float volume;
     private TipoAgua tipo;
     private int idUsuario;
-    private LocalTime ultimaAlimentacao;
+    private LocalDateTime ultimaAlimentacao;
     private boolean excluido;
 
     private Aquario(){
@@ -81,17 +83,17 @@ public class Aquario {
         return idUsuario;
     }
 
-    public LocalTime getUltimaAlimentacao(){
+    public LocalDateTime getUltimaAlimentacao(){
         return ultimaAlimentacao;
     }
 
-    public void setUltimaAlimentacao(LocalTime ultimaAlimentacao){
+    public void setUltimaAlimentacao(LocalDateTime ultimaAlimentacao){
 
         if(ultimaAlimentacao != null)
             this.ultimaAlimentacao = ultimaAlimentacao;
     }
 
-    public LocalTime getProximaAlimentacao(){
+    public LocalDateTime getProximaAlimentacao(){
         if(ultimaAlimentacao == null)
             return null;
         return ultimaAlimentacao.plusHours(10);

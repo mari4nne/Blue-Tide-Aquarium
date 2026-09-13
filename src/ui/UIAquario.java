@@ -2,7 +2,8 @@ package ui;
 
 import business.*;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -159,6 +160,8 @@ public class UIAquario {
     }
 
     public void getById() {
+        listarPeloId();
+
         int id;
         do {
             System.out.println("Digite o id do aquário:");
@@ -174,8 +177,15 @@ public class UIAquario {
             System.out.println("Volume: " + aquario.getVolume());
             System.out.println("Tipo de água: " + aquario.getTipo());
             System.out.println("Usuário: " + controlador.buscarNomeUsuarioPorId(aquario.getIdUsuario()));
-            System.out.println("Última alimentação: " + aquario.getUltimaAlimentacao());
-            System.out.println("Próxima alimentação: " + aquario.getProximaAlimentacao());
+            if (aquario.getUltimaAlimentacao() != null) {
+                DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                System.out.println("Ultima alimentação: " + aquario.getUltimaAlimentacao().format(fmt));
+                System.out.println("Próxima alimentação: " + aquario.getProximaAlimentacao().format(fmt));
+
+            } else {
+                System.out.println("Ultima alimentação: não registrada");
+                System.out.println("Próxima alimentação: não registrada");
+            }
         }
     }
 
@@ -188,6 +198,19 @@ public class UIAquario {
             Aquario aquario = aquarios.get(i);
             String nomeUsuario = controlador.buscarNomeUsuarioPorId(aquario.getIdUsuario());
             System.out.println((i + 1) + "  " + aquario.getCodigo() + "  " + aquario.getVolume() + "L  " + aquario.getTipo() + "  " + nomeUsuario);
+        }
+        System.out.println();
+    }
+
+    public void listarPeloId() {
+        System.out.println();
+        System.out.println("Aquários:");
+        System.out.println("Id - CodIdentif - Volume - Tipo - Dono");
+        List<Aquario> aquarios = controlador.getAll();
+        for (int i = 0; i < aquarios.size(); i++) {
+            Aquario aquario = aquarios.get(i);
+            String nomeUsuario = controlador.buscarNomeUsuarioPorId(aquario.getIdUsuario());
+            System.out.println(aquario.getId() + "  " + aquario.getCodigo() + "  " + aquario.getVolume() + "L  " + aquario.getTipo() + "  " + nomeUsuario);
         }
         System.out.println();
     }
@@ -206,6 +229,8 @@ public class UIAquario {
     }
 
     public void alimentar() {
+        listarPeloId();
+
         int id;
         do {
             System.out.println("Digite o id do aquário:");
@@ -218,12 +243,13 @@ public class UIAquario {
             return;
         }
 
-        LocalTime horarioAtual = LocalTime.now();
+        LocalDateTime horarioAtual = LocalDateTime.now().withNano(0);
         aquario.setUltimaAlimentacao(horarioAtual);
 
         if (controlador.update(aquario)) {
-            System.out.println("Alimentação registrada às " + aquario.getUltimaAlimentacao());
-            System.out.println("Próxima alimentação: " + aquario.getProximaAlimentacao());
+            DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+            System.out.println("Alimentação registrada às: " + aquario.getUltimaAlimentacao().format(fmt));
+            System.out.println("Próxima alimentação: " + aquario.getProximaAlimentacao().format(fmt));
         } else {
             System.out.println("Erro ao registrar alimentação.");
         }

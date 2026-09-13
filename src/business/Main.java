@@ -121,7 +121,6 @@ public class Main {
                     uiPeixe.showAll();
                     break;
                 case 6:
-                    uiAquario.listar();
                     uiPeixe.switchAquario();
                     break;
                 case 0:

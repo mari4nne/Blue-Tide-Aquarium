@@ -57,11 +57,21 @@ public class PeixeController {
         return repoAquario.getAll();
     }
 
-    public boolean verifyTipoAgua (Peixe p, int codAquario) {
+    public boolean  verifyTipoAgua (Peixe p, int codAquario) {
         if (p != null) {
             Aquario a = repoAquario.getById((codAquario));
 
             return a.getTipo() == p.getTipoAgua();
+        } else {
+            return false;
+        }
+    }
+
+    public boolean verifyTipoAgua (TipoAgua t, int codAquario) {
+        if (t != null) {
+            Aquario a = repoAquario.getById((codAquario));
+
+            return a.getTipo() == t;
         } else {
             return false;
         }

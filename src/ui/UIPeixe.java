@@ -62,7 +62,7 @@ public class UIPeixe {
             return;
         }
 
-        if (controlador.verifyUsuarioExistence(idUsuario) && controlador.verifyAquarioExistence(idAquario)) {
+        if (controlador.verifyUsuarioExistence(idUsuario) && controlador.verifyAquarioExistence(idAquario) && controlador.verifyTipoAgua(tipo, idAquario)) {
             Peixe novoPeixe = Peixe.getInstance(nome, tipo, idAquario, idUsuario);
 
             if (novoPeixe != null && controlador.add(novoPeixe)) {

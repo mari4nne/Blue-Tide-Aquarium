@@ -163,6 +163,8 @@ public class UIUsuario {
     }
 
     public void getById(){
+        showAllWithId();
+
         int id;
         do {
             System.out.print("Id do usuario: ");
@@ -191,6 +193,19 @@ public class UIUsuario {
                 System.out.println((i+1) + "  " + usuarios.get(i).getNome() + "  " + "PADRAO" + "  " + usuarios.get(i).getFone());
             else
                 System.out.println((i+1) + "  " + usuarios.get(i).getNome() + "  " + "ADMIN" + "  " + usuarios.get(i).getFone());
+        }
+    }
+
+    public void showAllWithId(){
+        System.out.println();
+        System.out.println("Usuarios:");
+        System.out.println("Cod - Nome - Tipo - Telefone");
+        List<Usuario> usuarios = controlador.getAll();
+        for (int i = 0; i < usuarios.size(); i++) {
+            if (usuarios.get(i).getTipo() == TipoUsuario.PADRAO)
+                System.out.println(usuarios.get(i).getId() + "  " + usuarios.get(i).getNome() + "  " + "PADRAO" + "  " + usuarios.get(i).getFone());
+            else
+                System.out.println(usuarios.get(i).getId() + "  " + usuarios.get(i).getNome() + "  " + "ADMIN" + "  " + usuarios.get(i).getFone());
         }
     }
 }
