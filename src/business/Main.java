@@ -43,8 +43,6 @@ public class Main {
         } while (opcao != 0);
     }
 
-    // temporário
-
     public static void painelUsuario() {
         int escolha;
 
@@ -56,6 +54,7 @@ public class Main {
             System.out.println("3: Excluir usuario");
             System.out.println("4: Buscar usuario pelo ID");
             System.out.println("5: Listar usuarios");
+            System.out.println("6: Modificar larguras");
             System.out.println("0: Sair");
             System.out.print("Sua escolha: ");
             escolha = scn.nextInt();
@@ -76,6 +75,8 @@ public class Main {
                 case 5:
                     uiUsuario.showAll();
                     break;
+                case 6:
+                    uiUsuario.mudarListagem();
                 case 0:
                     System.out.println("Finalizando...");
                     break;
@@ -100,6 +101,7 @@ public class Main {
             System.out.println("4: Buscar peixe pelo ID");
             System.out.println("5: Listar peixes");
             System.out.println("6: Trocar peixe de aquário");
+            System.out.println("7. Modificar larguras");
             System.out.println("0: Sair");
             System.out.print("Sua escolha: ");
             escolha = scn.nextInt();
@@ -122,6 +124,9 @@ public class Main {
                     break;
                 case 6:
                     uiPeixe.switchAquario();
+                    break;
+                case 7:
+                    uiPeixe.mudarListagem();
                     break;
                 case 0:
                     System.out.println("Finalizando...");
@@ -147,6 +152,7 @@ public class Main {
             System.out.println("4: Buscar aquario pelo ID");
             System.out.println("5: Listar aquarios");
             System.out.println("6: Alimentar aquario");
+            System.out.println("7. Modificar larguras");
             System.out.println("0: Sair");
             System.out.print("Sua escolha: ");
             escolha = scn.nextInt();
@@ -169,6 +175,9 @@ public class Main {
                     break;
                 case 6:
                     uiAquario.alimentar();
+                    break;
+                case 7:
+                    uiAquario.mudarListagem();
                     break;
                 case 0:
                     System.out.println("Finalizando...");

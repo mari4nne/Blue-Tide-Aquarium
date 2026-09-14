@@ -31,8 +31,8 @@ public class UIPeixe {
             System.out.println();
 
             System.out.println("Tipos:");
-            System.out.println("1: Água doce;");
-            System.out.println("2: Água salgada;");
+            System.out.println("1: AGUA DOCE");
+            System.out.println("2: AGUA SALGADA");
             System.out.print("Tipo escolhido: ");
             escolha = scn.nextInt();
 
@@ -213,15 +213,17 @@ public class UIPeixe {
     public void showAll() {
         System.out.println();
         System.out.println("Peixes:");
-        System.out.println("Cod - Nome - AquarioID - Água");
+
+        UIConfig.cabecalhoPeixe(false);
+
         List<Peixe> peixes = controlador.getAll();
         for (int i = 0; i < peixes.size(); i++) {
             Peixe peixe = peixes.get(i);
             if (peixe.getTipoAgua() == TipoAgua.DOCE) {
-                System.out.println((i + 1) + "  " + peixe.getNomePeixe() + "  " + peixe.getIdAquario() + "  AGUA DOCE");
+                UIConfig.listagemPeixe((i + 1), peixe.getNomePeixe(), "DOCE", peixe.getIdAquario(), controlador.buscarNomeUsuarioPorId(peixe.getIdUsuario()));
             }
             if (peixe.getTipoAgua() == TipoAgua.SALGADA) {
-                System.out.println((i + 1) + "  " + peixe.getNomePeixe() + "  " + peixe.getIdAquario() + "  AGUA SALGADA");
+                UIConfig.listagemPeixe((i + 1), peixe.getNomePeixe(), "SALGADA", peixe.getIdAquario(), controlador.buscarNomeUsuarioPorId(peixe.getIdUsuario()));
             }
         }
         System.out.println();
@@ -230,15 +232,17 @@ public class UIPeixe {
     public void showAllWithId() {
         System.out.println();
         System.out.println("Peixes:");
-        System.out.println("Cod - Nome - AquarioID - Água");
+
+        UIConfig.cabecalhoPeixe(false);
+
         List<Peixe> peixes = controlador.getAll();
         for (int i = 0; i < peixes.size(); i++) {
             Peixe peixe = peixes.get(i);
             if (peixe.getTipoAgua() == TipoAgua.DOCE) {
-                System.out.println(peixe.getIdPeixe() + "  " + peixe.getNomePeixe() + "  " + peixe.getIdAquario() + "  AGUA DOCE");
+                UIConfig.listagemPeixe(peixe.getIdPeixe(), peixe.getNomePeixe(), "DOCE", peixe.getIdAquario(), controlador.buscarNomeUsuarioPorId(peixe.getIdUsuario()));
             }
             if (peixe.getTipoAgua() == TipoAgua.SALGADA) {
-                System.out.println(peixe.getIdPeixe() + "  " + peixe.getNomePeixe() + "  " + peixe.getIdAquario() + "  AGUA SALGADA");
+                UIConfig.listagemPeixe(peixe.getIdPeixe(), peixe.getNomePeixe(), "SALGADA", peixe.getIdAquario(), controlador.buscarNomeUsuarioPorId(peixe.getIdUsuario()));
             }
         }
         System.out.println();
@@ -247,13 +251,46 @@ public class UIPeixe {
     public void listarAquarios() {
         System.out.println();
         System.out.println("Aquários:");
-        System.out.println("Cod - CodIdentif - Volume - Tipo - Dono");
+
+        UIConfig.cabecalhoAquario(true);
+
         List<Aquario> aquarios = controlador.getAllAquarios();
         for (int i = 0; i < aquarios.size(); i++) {
             Aquario aquario = aquarios.get(i);
             String nomeUsuario = controlador.buscarNomeUsuarioPorId(aquario.getIdUsuario());
-            System.out.println(aquario.getId() + "  " + aquario.getCodigo() + "  " + aquario.getVolume() + "L  " + aquario.getTipo() + "  " + nomeUsuario);
+
+            UIConfig.listagemAquario(aquario.getId(), aquario.getCodigo(), aquario.getVolume(), aquario.getTipo(), nomeUsuario);
         }
         System.out.println();
+    }
+
+    public void mudarListagem() {
+        UIConfig.setLarguraPeixeId(solicitarNovaLargura("Cod/Id", UIConfig.getLarguraPeixeId()));
+        UIConfig.setLarguraPeixeNome(solicitarNovaLargura("Nome", UIConfig.getLarguraPeixeNome()));
+        UIConfig.setLarguraPeixeTipoAgua(solicitarNovaLargura("Tipo", UIConfig.getLarguraPeixeTipoAgua()));
+        UIConfig.setLarguraPeixeIdAquario(solicitarNovaLargura("IdAquario", UIConfig.getLarguraPeixeIdAquario()));
+        UIConfig.setLarguraPeixeDono(solicitarNovaLargura("Dono", UIConfig.getLarguraPeixeDono()));
+
+        System.out.println("Larguras modificadas!");
+    }
+
+    private int solicitarNovaLargura(String nomeColuna, int valorAtual) {
+        int escolha;
+        do {
+            System.out.println("Alterar largura de " + nomeColuna + ": (1) Sim, (2) Não");
+            System.out.print("Escolha: ");
+            escolha = scn.nextInt();
+
+            if (escolha == 1) {
+                int novaLargura;
+                do {
+                    System.out.print("Nova largura (entre 5 e 30): ");
+                    novaLargura = scn.nextInt();
+                } while (novaLargura < 5 || novaLargura > 30);
+                return novaLargura;
+            }
+        } while (escolha != 2);
+
+        return valorAtual;
     }
 }

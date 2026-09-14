@@ -201,12 +201,15 @@ public class UIAquario {
     public void listar() {
         System.out.println();
         System.out.println("Aquários:");
-        System.out.println("Cod - CodIdentif - Volume - Tipo - Dono");
+
+        UIConfig.cabecalhoAquario(false);
+
         List<Aquario> aquarios = controlador.getAll();
         for (int i = 0; i < aquarios.size(); i++) {
             Aquario aquario = aquarios.get(i);
             String nomeUsuario = controlador.buscarNomeUsuarioPorId(aquario.getIdUsuario());
-            System.out.println((i + 1) + "  " + aquario.getCodigo() + "  " + aquario.getVolume() + "L  " + aquario.getTipo() + "  " + nomeUsuario);
+
+            UIConfig.listagemAquario((i + 1), aquario.getCodigo(), aquario.getVolume(), aquario.getTipo(), nomeUsuario);
         }
         System.out.println();
     }
@@ -214,12 +217,14 @@ public class UIAquario {
     public void listarPeloId() {
         System.out.println();
         System.out.println("Aquários:");
-        System.out.println("Id - CodIdentif - Volume - Tipo - Dono");
+
+        UIConfig.cabecalhoAquario(true);
+
         List<Aquario> aquarios = controlador.getAll();
         for (int i = 0; i < aquarios.size(); i++) {
             Aquario aquario = aquarios.get(i);
             String nomeUsuario = controlador.buscarNomeUsuarioPorId(aquario.getIdUsuario());
-            System.out.println(aquario.getId() + "  " + aquario.getCodigo() + "  " + aquario.getVolume() + "L  " + aquario.getTipo() + "  " + nomeUsuario);
+            UIConfig.listagemAquario(aquario.getId(), aquario.getCodigo(), aquario.getVolume(), aquario.getTipo(), nomeUsuario);
         }
         System.out.println();
     }
@@ -227,13 +232,15 @@ public class UIAquario {
     public void listarUsuarios() {
         System.out.println();
         System.out.println("Usuarios:");
-        System.out.println("Cod - Nome - Tipo - Telefone");
+
+        UIConfig.cabecalhoUsuario(false);
+
         List<Usuario> usuarios = controlador.getAllUsuarios();
         for (int i = 0; i < usuarios.size(); i++) {
             if (usuarios.get(i).getTipo() == TipoUsuario.PADRAO)
-                System.out.println(usuarios.get(i).getId() + "  " + usuarios.get(i).getNome() + "  " + "PADRAO" + "  " + usuarios.get(i).getFone());
+                UIConfig.listagemUsuario(usuarios.get(i).getId(), usuarios.get(i).getNome(), "PADRAO", usuarios.get(i).getFone());
             else
-                System.out.println(usuarios.get(i).getId() + "  " + usuarios.get(i).getNome() + "  " + "ADMIN" + "  " + usuarios.get(i).getFone());
+                UIConfig.listagemUsuario(usuarios.get(i).getId(), usuarios.get(i).getNome(), "LOJA", usuarios.get(i).getFone());
         }
     }
 
@@ -262,5 +269,35 @@ public class UIAquario {
         } else {
             System.out.println("Erro ao registrar alimentação.");
         }
+    }
+
+    public void mudarListagem() {
+        UIConfig.setLarguraAquarioId(solicitarNovaLargura("Cod/Id", UIConfig.getLarguraAquarioId()));
+        UIConfig.setLarguraAquarioCodigo(solicitarNovaLargura("CdIdentif", UIConfig.getLarguraAquarioCodigo()));
+        UIConfig.setLarguraAquarioVolume(solicitarNovaLargura("Volume", UIConfig.getLarguraAquarioVolume()));
+        UIConfig.setLarguraAquarioTipo(solicitarNovaLargura("Tipo", UIConfig.getLarguraAquarioTipo()));
+        UIConfig.setLarguraAquarioDono(solicitarNovaLargura("Dono", UIConfig.getLarguraAquarioDono()));
+
+        System.out.println("Larguras modificadas!");
+    }
+
+    private int solicitarNovaLargura(String nomeColuna, int valorAtual) {
+        int escolha;
+        do {
+            System.out.println("Alterar largura de " + nomeColuna + ": (1) Sim, (2) Não");
+            System.out.print("Escolha: ");
+            escolha = scn.nextInt();
+
+            if (escolha == 1) {
+                int novaLargura;
+                do {
+                    System.out.print("Nova largura (entre 5 e 30): ");
+                    novaLargura = scn.nextInt();
+                } while (novaLargura < 5 || novaLargura > 30);
+                return novaLargura;
+            }
+        } while (escolha != 2);
+
+        return valorAtual;
     }
 }

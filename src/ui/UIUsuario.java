@@ -42,7 +42,7 @@ public class UIUsuario {
                 tipo = TipoUsuario.PADRAO;
 
             if (escolha == 2)
-                tipo = TipoUsuario.ADMIN;
+                tipo = TipoUsuario.LOJA;
 
         } while (escolha != 1 && escolha != 2);
 
@@ -113,7 +113,7 @@ public class UIUsuario {
                         tipo = TipoUsuario.PADRAO;
 
                     if (preferencia == 2)
-                        tipo = TipoUsuario.ADMIN;
+                        tipo = TipoUsuario.LOJA;
 
                 } while (preferencia != 1 && preferencia != 2);
             }
@@ -195,26 +195,59 @@ public class UIUsuario {
     public void showAll(){
         System.out.println();
         System.out.println("Usuarios:");
-        System.out.println("Cod - Nome - Tipo - Telefone");
+
+        UIConfig.cabecalhoUsuario(false);
+
         List<Usuario> usuarios = controlador.getAll();
         for (int i = 0; i < usuarios.size(); i++) {
             if (usuarios.get(i).getTipo() == TipoUsuario.PADRAO)
-                System.out.println((i+1) + "  " + usuarios.get(i).getNome() + "  " + "PADRAO" + "  " + usuarios.get(i).getFone());
+                UIConfig.listagemUsuario((i+1), usuarios.get(i).getNome(), "PADRAO", usuarios.get(i).getFone());
             else
-                System.out.println((i+1) + "  " + usuarios.get(i).getNome() + "  " + "ADMIN" + "  " + usuarios.get(i).getFone());
+                UIConfig.listagemUsuario((i+1), usuarios.get(i).getNome(), "LOJA", usuarios.get(i).getFone());
         }
     }
 
     public void showAllWithId(){
         System.out.println();
         System.out.println("Usuarios:");
-        System.out.println("Cod - Nome - Tipo - Telefone");
+
+        UIConfig.cabecalhoUsuario(true);
+
         List<Usuario> usuarios = controlador.getAll();
         for (int i = 0; i < usuarios.size(); i++) {
             if (usuarios.get(i).getTipo() == TipoUsuario.PADRAO)
-                System.out.println(usuarios.get(i).getId() + "  " + usuarios.get(i).getNome() + "  " + "PADRAO" + "  " + usuarios.get(i).getFone());
+                UIConfig.listagemUsuario(usuarios.get(i).getId(), usuarios.get(i).getNome(), "PADRAO", usuarios.get(i).getFone());
             else
-                System.out.println(usuarios.get(i).getId() + "  " + usuarios.get(i).getNome() + "  " + "ADMIN" + "  " + usuarios.get(i).getFone());
+                UIConfig.listagemUsuario(usuarios.get(i).getId(), usuarios.get(i).getNome(), "LOJA", usuarios.get(i).getFone());
         }
+    }
+
+    public void mudarListagem() {
+        UIConfig.setLarguraUsuarioId(solicitarNovaLargura("Cod/Id", UIConfig.getLarguraUsuarioId()));
+        UIConfig.setLarguraUsuarioNome(solicitarNovaLargura("Nome", UIConfig.getLarguraUsuarioNome()));
+        UIConfig.setLarguraUsuarioTipo(solicitarNovaLargura("Tipo", UIConfig.getLarguraUsuarioTipo()));
+        UIConfig.setLarguraUsuarioFone(solicitarNovaLargura("Fone", UIConfig.getLarguraUsuarioFone()));
+
+        System.out.println("Larguras modificadas!");
+    }
+
+    private int solicitarNovaLargura(String nomeColuna, int valorAtual) {
+        int escolha;
+        do {
+            System.out.println("Alterar largura de " + nomeColuna + ": (1) Sim, (2) Não");
+            System.out.print("Escolha: ");
+            escolha = scn.nextInt();
+
+            if (escolha == 1) {
+                int novaLargura;
+                do {
+                    System.out.print("Nova largura (entre 5 e 30): ");
+                    novaLargura = scn.nextInt();
+                } while (novaLargura < 5 || novaLargura > 30);
+                return novaLargura;
+            }
+        } while (escolha != 2);
+
+        return valorAtual;
     }
 }

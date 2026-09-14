@@ -12,7 +12,7 @@ public class UsuarioRepository {
 
     private UsuarioRepository(){
         usuarios = new ArrayList<>();
-        usuarios.add(Usuario.getInstance("Vic", TipoUsuario.ADMIN, "91111-1111"));
+        usuarios.add(Usuario.getInstance("Aquarismo", TipoUsuario.LOJA, "91111-1111"));
         usuarios.add(Usuario.getInstance("Joaozinho", TipoUsuario.PADRAO, "92222-2222"));
     }
 
