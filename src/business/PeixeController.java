@@ -49,10 +49,6 @@ public class PeixeController {
         return repoPeixe.getAll();
     }
 
-    public List<Usuario> getAllUsuarios(){
-        return repoUsuario.getAll();
-    }
-
     public List<Aquario> getAllAquarios(){
         return repoAquario.getAll();
     }
@@ -93,12 +89,8 @@ public class PeixeController {
         return null;
     }
 
-    public int getUserByAquarioId(int idUsuario){
-        Usuario usuario = repoUsuario.getByIdUniversal(idUsuario);
-
-        if (usuario != null)
-            return usuario.getId();
-        return -1;
+    public int getUserByAquarioId(int idAquario){
+        return repoAquario.getByIdUniversal(idAquario).getIdUsuario();
     }
 
     public boolean verifyDonoAquario (Peixe p, int codAquario) {
@@ -108,12 +100,6 @@ public class PeixeController {
         if (a == null) return false;
 
         return p.getIdUsuario() == a.getIdUsuario();
-    }
-
-    public boolean verifyIdUser (Usuario u, Peixe p) {
-        if (u == null || p == null) return false;
-
-        return p.getIdUsuario() == u.getId();
     }
 
     public boolean verifyUsuarioExistence (int idUsuario) {

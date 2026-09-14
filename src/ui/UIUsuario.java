@@ -34,7 +34,7 @@ public class UIUsuario {
 
             System.out.println("Tipos");
             System.out.println("1: Padrao");
-            System.out.println("2: Admin");
+            System.out.println("2: Loja");
             System.out.print("Tipo escolhido: ");
             escolha = scn.nextInt();
 
@@ -105,7 +105,7 @@ public class UIUsuario {
                 do {
                     System.out.println("Tipos");
                     System.out.println("1: Padrao");
-                    System.out.println("2: Admin");
+                    System.out.println("2: Loja");
                     System.out.print("Tipo escolhido: ");
                     preferencia = scn.nextInt();
 
