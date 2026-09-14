@@ -1,16 +1,20 @@
 package business;
+
 import java.util.List;
 import repository.AquarioRepository;
+import repository.PeixeRepository;
 import repository.UsuarioRepository;
 
 public class AquarioController {
 
     private final AquarioRepository repoAquario;
     private final UsuarioRepository repoUsuario;
+    private final PeixeRepository repoPeixe;
 
     public AquarioController() {
         repoAquario = AquarioRepository.getInstance();
         repoUsuario = UsuarioRepository.getInstance();
+        repoPeixe = PeixeRepository.getInstance();
     }
 
     public boolean add(Aquario aquario) {
@@ -28,7 +32,20 @@ public class AquarioController {
     public Aquario deleteById(int id) {
         if (id < 0)
             return null;
+
+        if (!verifyAquario(id))
+            return null;
+
         return repoAquario.deleteById(id);
+    }
+
+    private boolean verifyAquario(int id){
+        List<Peixe> peixes = repoPeixe.getAll();
+        for (Peixe p : peixes) {
+            if (p.getIdAquario() == id)
+                return false;
+        }
+        return true;
     }
 
     public Aquario getById(int id) {

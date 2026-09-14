@@ -58,7 +58,7 @@ public class UIConfig {
                         "%-" + UIConfig.larguraPeixeTipoAgua + "s " +
                         "%-" + UIConfig.larguraPeixeIdAquario + "s " +
                         "%-" + UIConfig.larguraPeixeDono + "s%n",
-                codId, "Nome", "Tipo", "IdAquario", "Dono");
+                codId, "Nome", "Tipo", "Aquario", "Dono");
     }
 
     public static void listagemAquario(int cod, String codI, float volume, TipoAgua tipo, String nome){
@@ -70,13 +70,13 @@ public class UIConfig {
                 cod, codI, volume, tipo, nome);
     }
 
-    public static void listagemPeixe(int cod, String nome, String tipo, int idAquario, String dono){
+    public static void listagemPeixe(int cod, String nome, String tipo, String aquario, String dono){
         System.out.printf("%-" + UIConfig.larguraPeixeId + "d " +
                         "%-" + UIConfig.larguraPeixeNome + "s " +
                         "%-" + UIConfig.larguraPeixeTipoAgua + "s " +
-                        "%-" + UIConfig.larguraPeixeIdAquario + "d " +
+                        "%-" + UIConfig.larguraPeixeIdAquario + "s " +
                         "%-" + UIConfig.larguraPeixeDono + "s%n",
-                cod, nome, tipo, idAquario, dono);
+                cod, nome, tipo, aquario, dono);
     }
 
     public static void listagemUsuario(int cod, String nome, String tipo, String fone){

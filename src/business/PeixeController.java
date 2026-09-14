@@ -85,6 +85,14 @@ public class PeixeController {
         return null;
     }
 
+    public String buscarCodAquarioPorId(int idAquario){
+        Aquario aquario = repoAquario.getByIdUniversal(idAquario);
+
+        if (aquario != null)
+            return aquario.getCodigo();
+        return null;
+    }
+
     public int getUserByAquarioId(int idUsuario){
         Usuario usuario = repoUsuario.getByIdUniversal(idUsuario);
 

@@ -162,7 +162,7 @@ public class UIAquario {
 
         Aquario aquario = controlador.deleteById(aquarioEncontrado.getId());
         if (aquario == null) {
-            System.out.println("Aquário não encontrado.");
+            System.out.println("Aquário não encontrado ou possui peixes cadastrados.");
         } else {
             System.out.println("Aquário excluído com sucesso!");
         }

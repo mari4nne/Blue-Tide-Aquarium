@@ -220,10 +220,10 @@ public class UIPeixe {
         for (int i = 0; i < peixes.size(); i++) {
             Peixe peixe = peixes.get(i);
             if (peixe.getTipoAgua() == TipoAgua.DOCE) {
-                UIConfig.listagemPeixe((i + 1), peixe.getNomePeixe(), "DOCE", peixe.getIdAquario(), controlador.buscarNomeUsuarioPorId(peixe.getIdUsuario()));
+                UIConfig.listagemPeixe((i + 1), peixe.getNomePeixe(), "DOCE", controlador.buscarCodAquarioPorId(peixe.getIdAquario()), controlador.buscarNomeUsuarioPorId(peixe.getIdUsuario()));
             }
             if (peixe.getTipoAgua() == TipoAgua.SALGADA) {
-                UIConfig.listagemPeixe((i + 1), peixe.getNomePeixe(), "SALGADA", peixe.getIdAquario(), controlador.buscarNomeUsuarioPorId(peixe.getIdUsuario()));
+                UIConfig.listagemPeixe((i + 1), peixe.getNomePeixe(), "SALGADA", controlador.buscarCodAquarioPorId(peixe.getIdAquario()), controlador.buscarNomeUsuarioPorId(peixe.getIdUsuario()));
             }
         }
         System.out.println();
@@ -239,10 +239,10 @@ public class UIPeixe {
         for (int i = 0; i < peixes.size(); i++) {
             Peixe peixe = peixes.get(i);
             if (peixe.getTipoAgua() == TipoAgua.DOCE) {
-                UIConfig.listagemPeixe(peixe.getIdPeixe(), peixe.getNomePeixe(), "DOCE", peixe.getIdAquario(), controlador.buscarNomeUsuarioPorId(peixe.getIdUsuario()));
+                UIConfig.listagemPeixe(peixe.getIdPeixe(), peixe.getNomePeixe(), "DOCE", controlador.buscarCodAquarioPorId(peixe.getIdAquario()), controlador.buscarNomeUsuarioPorId(peixe.getIdUsuario()));
             }
             if (peixe.getTipoAgua() == TipoAgua.SALGADA) {
-                UIConfig.listagemPeixe(peixe.getIdPeixe(), peixe.getNomePeixe(), "SALGADA", peixe.getIdAquario(), controlador.buscarNomeUsuarioPorId(peixe.getIdUsuario()));
+                UIConfig.listagemPeixe(peixe.getIdPeixe(), peixe.getNomePeixe(), "SALGADA", controlador.buscarCodAquarioPorId(peixe.getIdAquario()), controlador.buscarNomeUsuarioPorId(peixe.getIdUsuario()));
             }
         }
         System.out.println();
